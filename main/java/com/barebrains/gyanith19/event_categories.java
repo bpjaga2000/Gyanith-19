@@ -1,5 +1,6 @@
 package com.barebrains.gyanith19;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class event_categories extends AppCompatActivity {
         items=new ArrayList<eventitem>();
         setContentView(R.layout.activity_event_categories);
         lvi=findViewById(R.id.eveitlv);
+        final Intent i1=new Intent(this,event_details.class);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
@@ -71,12 +74,16 @@ public class event_categories extends AppCompatActivity {
             }
         });
 
-        ada.notifyDataSetChanged();
-        if(ada!=null) {
-            Log.i("nnj","not null");
-            lvi.setAdapter(ada);
-        }
+        lvi.setAdapter(ada);
 
+        lvi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                i1.putExtra("category",s);
+                i1.putExtra("tag",s.charAt(0)+Integer.toString(position+1));
+                startActivity(i1);
+            }
+        });
 
     }
 }

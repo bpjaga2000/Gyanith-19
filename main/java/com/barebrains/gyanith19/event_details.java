@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -61,13 +62,10 @@ public class event_details extends AppCompatActivity {
         });
 
         favtb.setChecked(sp.getBoolean(tag,false));
-        favtb.setOnClickListener(new View.OnClickListener() {
+        favtb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Log.i("first",String.valueOf(favtb.isChecked()));
-                favtb.setChecked(!favtb.isChecked());
-                sp.edit().putBoolean(tag,favtb.isChecked()).apply();
-                Log.i("second",String.valueOf(favtb.isChecked()));
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                sp.edit().putBoolean(tag,favtb.isChecked()).commit();
             }
         });
 

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class event_details extends AppCompatActivity {
     Intent intent;
     String child,tag;
     SharedPreferences sp;
+    Button bb2;
 
 
     @Override
@@ -35,10 +37,12 @@ public class event_details extends AppCompatActivity {
         setContentView(R.layout.activity_event_details);
         sp= this.getSharedPreferences("com.barebrains.Gyanith19",MODE_PRIVATE);
 
+        bb2=findViewById(R.id.backbut2);
         intent = getIntent();
         child=intent.getStringExtra("category");
         tag= intent.getStringExtra("tag");
 
+        Log.i("tagy",tag);
 
         title=findViewById(R.id.evedttitle);
         desc=findViewById(R.id.evedesc);
@@ -46,13 +50,20 @@ public class event_details extends AppCompatActivity {
         eveimage=findViewById(R.id.eveimv);
         favtb=findViewById(R.id.favButton);
 
+        bb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         reference = FirebaseDatabase.getInstance().getReference().child(child).child(tag);
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                title.setText(dataSnapshot.child("name").getValue().toString());
-                desc.setText(dataSnapshot.child("desc").getValue().toString());
+                    title.setText(dataSnapshot.child("name").getValue().toString());
+                    desc.setText(dataSnapshot.child("desc").getValue().toString());
             }
 
             @Override
@@ -68,6 +79,8 @@ public class event_details extends AppCompatActivity {
                 sp.edit().putBoolean(tag,favtb.isChecked()).commit();
             }
         });
+
+
 
     }
 }

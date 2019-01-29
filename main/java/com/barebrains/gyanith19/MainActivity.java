@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_favourites:
                     ((TextView)findViewById(R.id.title)).setText("Favorites");
+                    replace(new favourites());
                     return true;
                 case R.id.navigation_notifications:
                     ((TextView)findViewById(R.id.title)).setText("Notifications");

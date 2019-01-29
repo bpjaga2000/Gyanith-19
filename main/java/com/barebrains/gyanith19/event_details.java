@@ -1,12 +1,15 @@
 package com.barebrains.gyanith19;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,16 +20,19 @@ import com.google.firebase.database.ValueEventListener;
 public class event_details extends AppCompatActivity {
 
     TextView title,desc;
-    ImageView eveimage,favimage,back;
+    ImageView eveimage,back;
+    ToggleButton favtb;
     DatabaseReference reference;
     Intent intent;
     String child,tag;
+    SharedPreferences sp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
+        sp= this.getSharedPreferences("com.barebrains.Gyanith19",MODE_PRIVATE);
 
         intent = getIntent();
         child=intent.getStringExtra("category");
@@ -37,7 +43,7 @@ public class event_details extends AppCompatActivity {
         desc=findViewById(R.id.evedesc);
 
         eveimage=findViewById(R.id.eveimv);
-        Log.i("item",tag);
+        favtb=findViewById(R.id.favButton);
 
         reference = FirebaseDatabase.getInstance().getReference().child(child).child(tag);
 
@@ -54,7 +60,16 @@ public class event_details extends AppCompatActivity {
             }
         });
 
-
+        favtb.setChecked(sp.getBoolean(tag,false));
+        favtb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("first",String.valueOf(favtb.isChecked()));
+                favtb.setChecked(!favtb.isChecked());
+                sp.edit().putBoolean(tag,favtb.isChecked()).apply();
+                Log.i("second",String.valueOf(favtb.isChecked()));
+            }
+        });
 
     }
 }

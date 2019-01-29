@@ -65,11 +65,12 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:textOff=""
-                    android:textOn=""
-                    android:text=""
+                    android:background="@null"
                     android:button="@drawable/toggle_button"
-                    android:background="@null"/>
+                    android:text=""
+                    android:textOff=""
+                    android:checked="false"
+                    android:textOn="" />
 
             </LinearLayout>
 

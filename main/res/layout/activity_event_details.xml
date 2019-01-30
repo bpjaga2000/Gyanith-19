@@ -24,90 +24,97 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/eveimv"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_launcher_background" />
+                android:layout_height="270dp"
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/backbut2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:background="?attr/homeAsUpIndicator"
-                android:backgroundTint="@android:color/black"
-                android:foreground="?attr/selectableItemBackground" />
+                <ImageView
+                    android:id="@+id/eveimv"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@null" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/evedttitle"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/spregu"
-                    android:text="Introduction to deep learning"
-                    android:textColor="@android:color/white"
-                    android:textSize="32sp" />
-
-                <ToggleButton
-                    android:id="@+id/favButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="bottom|right"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:button="@drawable/toggle_button"
-                    android:text=""
-                    android:textOff=""
-                    android:checked="false"
-                    android:textOn="" />
+                    android:background="@mipmap/ic_launcher_round"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:paddingLeft="9dp"
+                    android:paddingTop="10.5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10.5dp">
 
-            </LinearLayout>
+                    <ToggleButton
+                        android:id="@+id/favButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:button="@drawable/toggle_button"
+                        android:checked="false"
+                        android:foregroundGravity="center"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
+                </FrameLayout>
 
-        </FrameLayout>
+                <Button
+                    android:id="@+id/backbut2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?attr/homeAsUpIndicator"
+                    android:backgroundTint="@android:color/white"
+                    android:foreground="?attr/selectableItemBackground" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/evedesc"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/pnreg"
-                    android:text="A sample description about the event here "
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-        </ScrollView>
+                    android:orientation="horizontal">
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/evedttitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/spregu"
+                        android:gravity="center"
+                        android:text="Introduction to deep learning"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/evedesc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/pnreg"
+                android:text="A sample description about the event here but somewhat long for multiple lines"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

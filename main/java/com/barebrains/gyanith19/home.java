@@ -1,5 +1,7 @@
 package com.barebrains.gyanith19;
 
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.view.animation.DecelerateInterpolator;
 
 
 public class home extends Fragment {
+    private long delay1=0;
+    private long delay2=0;
 
 
 
@@ -87,6 +92,72 @@ public class home extends Fragment {
                 startActivity(i);
             }
         });
+
+
+        CardView w=(CardView)root.findViewById(R.id.w);
+        CardView te=(CardView)root.findViewById(R.id.te);
+        CardView nte=(CardView)root.findViewById(R.id.nte);
+        nte.setAlpha(0);
+        CardView ps=(CardView)root.findViewById(R.id.ps);
+       ps.setAlpha(0);
+        CardView gl=(CardView)root.findViewById(R.id.gl);
+       gl.setAlpha(0);
+        CardView un=(CardView)root.findViewById(R.id.ud);
+        un.setAlpha(0);
+
+        ObjectAnimator wa=ObjectAnimator.ofFloat(w,"translationX",-300f,0f);
+        wa.setInterpolator(new DecelerateInterpolator());
+        wa.setStartDelay(delay1);
+        wa.setDuration(300);
+        wa.start();
+        delay1+=150;
+
+        ObjectAnimator nta=ObjectAnimator.ofFloat(nte,"translationX",-300f,0f);
+        nta.setInterpolator(new DecelerateInterpolator());
+        nta.setStartDelay(delay1);
+        nta.setDuration(300);
+        nta.start();
+        ObjectAnimator ntl=ObjectAnimator.ofFloat(nte,"alpha",0,1);
+        ntl.setStartDelay(delay1);
+        ntl.start();
+        delay1+=150;
+
+        ObjectAnimator ua=ObjectAnimator.ofFloat(un,"translationX",-300f,0f);
+        ua.setInterpolator(new DecelerateInterpolator());
+        ua.setStartDelay(delay1);
+        ua.setDuration(300);
+        ua.start();
+        ObjectAnimator ul=ObjectAnimator.ofFloat(un,"alpha",0,1);
+        ul.setStartDelay(delay1);
+        ul.start();
+        delay1+=150;
+
+        ObjectAnimator ta=ObjectAnimator.ofFloat(te,"translationX",300f,0f);
+        ta.setInterpolator(new DecelerateInterpolator());
+        ta.setStartDelay(delay2);
+        ta.setDuration(300);
+        ta.start();
+        delay2+=150;
+
+        ObjectAnimator pa=ObjectAnimator.ofFloat(ps,"translationX",300f,0f);
+        pa.setInterpolator(new DecelerateInterpolator());
+        pa.setStartDelay(delay2);
+        pa.setDuration(300);
+        pa.start();
+        ObjectAnimator pl=ObjectAnimator.ofFloat(ps,"alpha",0,1);
+        pl.setStartDelay(delay2);
+        pl.start();
+        delay2+=150;
+
+        ObjectAnimator ga=ObjectAnimator.ofFloat(gl,"translationX",300f,0f);
+        ga.setInterpolator(new DecelerateInterpolator());
+        ga.setStartDelay(delay2);
+        ga.setDuration(300);
+        ga.start();
+        ObjectAnimator gll=ObjectAnimator.ofFloat(gl,"alpha",0,1);
+        gll.setStartDelay(delay2);
+        gll.start();
+        delay2+=150;
 
 
 

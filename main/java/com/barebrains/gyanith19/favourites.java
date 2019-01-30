@@ -72,8 +72,9 @@ public class favourites extends Fragment {
                     for(DataSnapshot snapshot:sh.getChildren()){
                         if(snapshot.child("desc").exists()){
 
+                            Log.i("tagy",snapshot.getKey());
                             if(sp.getBoolean(snapshot.getKey(),false)) {
-                                it = new eventitem(snapshot.child("name").getValue().toString(), snapshot.child("timestamp").getValue().toString());
+                                it = new eventitem(snapshot.child("name").getValue().toString(), snapshot.child("timestamp").getValue().toString(), snapshot.getKey());
                                 items.add(it);
                                 tag.add(snapshot.getKey());
                             }

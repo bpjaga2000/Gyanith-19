@@ -41,9 +41,6 @@ public class event_details extends AppCompatActivity {
         intent = getIntent();
         child=intent.getStringExtra("category");
         tag= intent.getStringExtra("tag");
-
-        Log.i("tagy",tag);
-
         title=findViewById(R.id.evedttitle);
         desc=findViewById(R.id.evedesc);
 
@@ -64,6 +61,9 @@ public class event_details extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     title.setText(dataSnapshot.child("name").getValue().toString());
                     desc.setText(dataSnapshot.child("desc").getValue().toString());
+                    int id = getResources().getIdentifier("com.barebrains.gyanith19:drawable/" + tag.toLowerCase()+'b', null, null);
+                    if(id!=0)
+                    ((ImageView)findViewById(R.id.eveimv)).setImageResource(id);
             }
 
             @Override

@@ -62,11 +62,11 @@ public class event_categories extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    it=new eventitem(snapshot.child("name").getValue().toString(),snapshot.child("timestamp").getValue().toString());
+                    it=new eventitem(snapshot.child("name").getValue().toString(),snapshot.child("timestamp").getValue().toString(),snapshot.getKey().toString());
                     items.add(it);
 
                 }
-                ((ProgressBar)findViewById(R.id.progressBar2)).setVisibility(View.GONE);
+                ((ProgressBar)findViewById(R.id.catload)).setVisibility(View.GONE);
                 ada.notifyDataSetChanged();
             }
 

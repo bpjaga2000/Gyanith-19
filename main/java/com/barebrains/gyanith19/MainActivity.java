@@ -1,6 +1,7 @@
 package com.barebrains.gyanith19;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView botnav;
     List s= Arrays.asList("Gyanith19","Schedule","Favourites","Notification");
     List itsl=Arrays.asList(R.id.navigation_home,R.id.navigation_schedule,R.id.navigation_favourites,R.id.navigation_notifications);
+    private TextView mTextMessage;
+   private FrameLayout parent;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

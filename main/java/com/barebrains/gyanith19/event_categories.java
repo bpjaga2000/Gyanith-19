@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -65,6 +66,7 @@ public class event_categories extends AppCompatActivity {
                     items.add(it);
 
                 }
+                ((ProgressBar)findViewById(R.id.progressBar2)).setVisibility(View.GONE);
                 ada.notifyDataSetChanged();
             }
 

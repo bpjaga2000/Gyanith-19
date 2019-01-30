@@ -1,24 +1,36 @@
 package com.barebrains.gyanith19;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-   private FrameLayout parent;
+    int numoffragments=4;
+    ViewPager viewPager;
+    PagerAdapter pagerAdapter;
+    Fragment fragment;
+    BottomNavigationView botnav;
+    List s= Arrays.asList("Gyanith19","Schedule","Favourites","Notification");
+    List itsl=Arrays.asList(R.id.navigation_home,R.id.navigation_schedule,R.id.navigation_favourites,R.id.navigation_notifications);
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,22 +39,17 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    ((TextView)findViewById(R.id.title)).setText("Gyanith 19");
-                    replace(new home());
-
-                  return true;
+                    viewPager.setCurrentItem(0);
+                    return true;
                 case R.id.navigation_schedule:
-                    ((TextView)findViewById(R.id.title)).setText("Schedule");
-                    replace(new schedule());
+                    viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_favourites:
-                    ((TextView)findViewById(R.id.title)).setText("Favorites");
-                    replace(new favourites());
+                    viewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_notifications:
-                    ((TextView)findViewById(R.id.title)).setText("Notifications");
-                    replace(new notifications());
-                   return true;
+                    viewPager.setCurrentItem(3);
+                    return true;
             }
             return false;
         }
@@ -61,12 +68,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+        botnav=findViewById(R.id.navigation);
+        viewPager=findViewById(R.id.gestureelement);
+        pagerAdapter= new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(0);
+
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
         }
 
-        parent=(FrameLayout)findViewById(R.id.mainframe);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -80,10 +93,60 @@ public class MainActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.account)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),profile.class);
+                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(i);
             }
         });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                ((TextView)findViewById(R.id.title)).setText(s.get(i).toString());
+                botnav.setSelectedItemId(Integer.parseInt(itsl.get(i).toString()));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
     }
+
+    public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            fragment=null;
+            switch (i) {
+                case 0:
+                    fragment = new home();
+                    break;
+                case 1:
+                    fragment = new schedule();
+                    break;
+                case 2:
+                    fragment = new favourites();
+                    break;
+                case 3:
+                    fragment = new notifications();
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return numoffragments;
+        }
+    }
+
 
 }

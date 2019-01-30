@@ -86,15 +86,28 @@
 
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/evedesc"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/pnreg"
-            android:text="A sample description about the event here "
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/evedesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/pnreg"
+                    android:text="A sample description about the event here "
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

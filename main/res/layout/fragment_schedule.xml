@@ -41,7 +41,8 @@
                 android:id="@+id/schlv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/schtabLayout">
+                app:layout_constraintTop_toBottomOf="@+id/schtabLayout"
+                android:divider = "@null">
 
             </ListView>
         </LinearLayout>

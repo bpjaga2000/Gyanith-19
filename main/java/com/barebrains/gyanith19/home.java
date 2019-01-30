@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class home extends Fragment {
@@ -36,6 +37,7 @@ public class home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root=inflater.inflate(R.layout.fragment_home, container, false);
+
 
         ((CardView)root.findViewById(R.id.w)).setOnClickListener(new View.OnClickListener() {
             @Override

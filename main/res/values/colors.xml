@@ -2,9 +2,13 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#171723</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#ff0111</color>
     <color name="grey">#e9e6e6</color>
     <color name="blackbg">#020203</color>
     <color name="topb">#1E1E2E</color>
     <color name="topbar">#171723</color>
+    <color name="sam">#49495b</color>
+    <color name="whitealpha">#b4ffffff</color>
+    <color name="redd">#ff0111</color>
+    <color name="cardbg">#373748</color>
 </resources>

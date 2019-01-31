@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/topb"
     tools:context=".event_details">
 
     <Button
@@ -35,7 +36,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
+                android:layout_height="280dp"
                 android:layout_weight="1">
 
                 <ImageView
@@ -44,22 +45,34 @@
                     android:layout_height="250dp"
                     android:background="@null" />
 
+                <ImageView
+                    android:id="@+id/fh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:alpha="0"
+                    android:tint="#ff0111"
+                    app:srcCompat="@drawable/ic_baseline_favorite_24px" />
+
+
                 <FrameLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:layout_gravity="bottom|right"
                     android:layout_marginRight="10dp"
                     android:background="@mipmap/ic_launcher_round"
-                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:backgroundTint="@color/cardbg"
+                    android:elevation="5dp"
+                    android:paddingBottom="10.5dp"
                     android:paddingLeft="9dp"
-                    android:paddingTop="10.5dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="10.5dp">
+                    android:paddingTop="10.5dp">
 
                     <ToggleButton
                         android:id="@+id/favButton"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:background="@null"
                         android:button="@drawable/toggle_button"
                         android:checked="false"
@@ -67,6 +80,7 @@
                         android:text=""
                         android:textOff=""
                         android:textOn="" />
+
                 </FrameLayout>
 
                 <Button
@@ -90,7 +104,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|center_horizontal"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="25dp"
                         android:fontFamily="@font/spregu"
                         android:gravity="center"
                         android:text="Introduction to deep learning"
@@ -112,7 +126,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/pnreg"
                 android:text="A sample description about the event here but somewhat long for multiple lines"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>

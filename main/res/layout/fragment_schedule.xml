@@ -19,23 +19,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/schtabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/schtabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabIndicatorColor="@color/redd"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="#64ffffff">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Day1" />
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Live" />
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Day2" />
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Day 0" />
 
-    </android.support.design.widget.TabLayout>
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Day 1" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Day 3" />
+
+            </android.support.design.widget.TabLayout>
 
             <ListView
                 android:id="@+id/schlv"

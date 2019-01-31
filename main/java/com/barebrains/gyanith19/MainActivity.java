@@ -79,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(0);
         viewPager.setOffscreenPageLimit(0);
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+       /* if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
-        }
+        }*/
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

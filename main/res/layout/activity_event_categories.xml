@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/topb"
     tools:context=".event_categories">
 
     <ProgressBar
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -30,9 +32,9 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:background="?attr/homeAsUpIndicator"
-                android:backgroundTint="@android:color/black" />
+                android:backgroundTint="@android:color/white"
+                android:foreground="?attr/selectableItemBackground" />
 
             <TextView
                 android:id="@+id/cattitle"
@@ -40,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/splight"
                 android:text="TextView"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
         </LinearLayout>
 
@@ -48,10 +50,9 @@
             android:id="@+id/eveitlv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@null"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:divider = "@null">
-        </ListView>
+            tools:layout_editor_absoluteY="8dp"></ListView>
 
     </LinearLayout>
 </FrameLayout>

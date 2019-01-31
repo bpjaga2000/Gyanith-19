@@ -40,10 +40,10 @@ public class event_categories extends AppCompatActivity {
         setContentView(R.layout.activity_event_categories);
         lvi=findViewById(R.id.eveitlv);
         final Intent i1=new Intent(this,event_details.class);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+        /*if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
-        }
+        }*/
 
 
 

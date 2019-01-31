@@ -8,174 +8,187 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/w"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#f22613"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:text="Workshops"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/nte"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#19b5fe"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/w"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#f22613"
+                        app:cardCornerRadius="5dp">
 
-                <TextView
-                    android:id="@+id/ntet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:gravity="center_horizontal"
-                    android:text="Non Technical events"
+                        <TextView
+                            android:id="@+id/wt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:text="Workshops"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
 
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/nte"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#19b5fe"
+                        app:cardCornerRadius="5dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/ud"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#7b1fa2"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
+                        <TextView
+                            android:id="@+id/ntet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:gravity="center_horizontal"
+                            android:text="Non Technical events"
 
-                <TextView
-                    android:id="@+id/udt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:gravity="center_horizontal"
-                    android:text="Un-named category "
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
 
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/ud"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#7b1fa2"
+                        app:cardCornerRadius="5dp">
 
+                        <TextView
+                            android:id="@+id/udt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:gravity="center_horizontal"
+                            android:text="Un-named category "
+
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/te"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#5b3256"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:id="@+id/tet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:gravity="center_horizontal"
+
+                            android:text="Technical events"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/ps"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#03a678"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:id="@+id/pst"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:gravity="center_horizontal"
+                            android:text="Pro shows"
+                            android:textColor="@android:color/white"
+
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/gl"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="#f62952"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:id="@+id/glt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/spregu"
+                            android:gravity="center_horizontal"
+                            android:text="Guest Lectures"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/te"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#5b3256"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
-
-                <TextView
-                    android:id="@+id/tet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:text="Technical events"
-
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/ps"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#03a678"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
-
-                <TextView
-                    android:id="@+id/pst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:gravity="center_horizontal"
-                    android:text="Pro shows"
-                    android:textColor="@android:color/white"
-
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/gl"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#f62952"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
-
-                <TextView
-                    android:id="@+id/glt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/spregu"
-                    android:gravity="center_horizontal"
-                    android:text="Guest Lectures"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 </FrameLayout>

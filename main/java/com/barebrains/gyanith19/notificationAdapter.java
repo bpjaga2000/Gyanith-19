@@ -1,9 +1,11 @@
 package com.barebrains.gyanith19;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ public class notificationAdapter extends ArrayAdapter {
     private Context c;
     private ArrayList<notificationItem> list;
     private int res;
+    int pos=0;
 
     public notificationAdapter(Context c, ArrayList<notificationItem> list, int res) {
         super(c, res, list);
@@ -29,6 +32,20 @@ public class notificationAdapter extends ArrayAdapter {
         ((TextView) root.findViewById(R.id.notificationSender)).setText(list.get(position).getSender());
         ((TextView) root.findViewById(R.id.notificationTime)).setText(list.get(position).getTime());
         ((TextView) root.findViewById(R.id.notificationText)).setText(list.get(position).getText());
+        if (position==pos) {
+
+
+            root.setAlpha(0);
+            Long delay = Long.valueOf(position * 150);
+            ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
+            a.setStartDelay(delay);
+            a.setDuration(100);
+            a.start();
+
+
+            pos++;
+        }
+
 
         return root;
     }

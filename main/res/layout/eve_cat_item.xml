@@ -10,7 +10,6 @@
         android:orientation="vertical">
 
 
-
         <android.support.v7.widget.CardView
             android:id="@+id/dummy"
             android:layout_width="match_parent"
@@ -20,7 +19,9 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="5dp">
+            app:cardBackgroundColor="@color/cardbg"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/pnbold"
                         android:text="Introduction to deep learning"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                     <TextView
@@ -58,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pnreg"
                         android:text="Day 1 9:00 AM | SF4"
+                        android:textColor="@color/whitealpha"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>

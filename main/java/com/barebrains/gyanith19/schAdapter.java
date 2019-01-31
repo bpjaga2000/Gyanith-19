@@ -16,7 +16,7 @@ public class schAdapter extends ArrayAdapter {
     private Context c;
     private ArrayList<schItem> list;
     private int res;
-    Boolean flg=true;
+    int pos=0;
 
     public schAdapter(Context c, ArrayList<schItem> list, int res) {
         super(c, res, list);
@@ -33,7 +33,7 @@ public class schAdapter extends ArrayAdapter {
         ((TextView)root.findViewById(R.id.time)).setText(list.get(position).getTime());
         ((TextView)root.findViewById(R.id.title)).setText(list.get(position).getTitle());
         ((TextView)root.findViewById(R.id.venue)).setText(list.get(position).getVenue());
-        if (flg) {
+        if (position==pos) {
 
 
             root.setAlpha(0);
@@ -41,12 +41,12 @@ public class schAdapter extends ArrayAdapter {
             ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
             a.setStartDelay(delay);
             a.start();
-            ObjectAnimator o = ObjectAnimator.ofFloat(root, "translationY", 300f, 0f);
+            ObjectAnimator o = ObjectAnimator.ofFloat(root, "scaleX",0,1);
             o.setStartDelay(delay);
             o.setInterpolator(new DecelerateInterpolator());
             o.setDuration(300);
             o.start();
-           // flg=false;
+           pos++;
         }
 
         return root;

@@ -1,5 +1,6 @@
 package com.barebrains.gyanith19;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -71,12 +72,25 @@ public class event_details extends AppCompatActivity {
 
             }
         });
+        final ImageView f=(ImageView)findViewById(R.id.fh) ;
 
         favtb.setChecked(sp.getBoolean(tag,false));
         favtb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 sp.edit().putBoolean(tag,favtb.isChecked()).commit();
+                if(isChecked){
+                    ObjectAnimator fa=ObjectAnimator.ofFloat(f,"alpha",1,0);
+                    fa.setDuration(500);
+                    fa.start();
+                    ObjectAnimator fa1=ObjectAnimator.ofFloat(f,"scaleX",1,5);
+                    fa1.setDuration(500);
+                    fa1.start();
+                    ObjectAnimator fa2=ObjectAnimator.ofFloat(f,"scaleY",1,5);
+                    fa2.setDuration(500);
+                    fa2.start();
+
+                }
             }
         });
 

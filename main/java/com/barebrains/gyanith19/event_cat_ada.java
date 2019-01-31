@@ -23,7 +23,7 @@ public class event_cat_ada extends ArrayAdapter{
     int res;
     ArrayList<eventitem> ei;
     Context c;
-    Boolean flg=true;
+    int pos=0;
 
     public event_cat_ada( int res, ArrayList<eventitem> ei, Context c) {
         super(c, res, ei);
@@ -40,7 +40,7 @@ public class event_cat_ada extends ArrayAdapter{
         View root = li.inflate(res, null, false);
         ((TextView) root.findViewById(R.id.eveitname)).setText(ei.get(position).getName());
         ((TextView) root.findViewById(R.id.eveittime)).setText(ei.get(position).getTime());
-        if (flg) {
+        if (pos==position) {
 
 
         root.setAlpha(0);
@@ -55,7 +55,7 @@ public class event_cat_ada extends ArrayAdapter{
         o.setInterpolator(new DecelerateInterpolator());
         o.setDuration(500);
         o.start();
-        //flg=false;
+       pos++;
     }
 
         ((TextView)root.findViewById(R.id.eveitname)).setText(ei.get(position).getName());

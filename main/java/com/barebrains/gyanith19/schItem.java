@@ -1,23 +1,27 @@
 package com.barebrains.gyanith19;
 
-public class schItem {
-    private String title, time, venue;
+public class schitem {
 
-    public schItem(String title, String time, String venue) {
-        this.title = title;
-        this.time = time;
-        this.venue = venue;
+    String venue,time,title;
+
+    public schitem() {
     }
 
-    public String getTitle() {
-        return title;
+    public schitem(String venue, String time, String title) {
+        this.venue = venue;
+        this.time = time;
+        this.title = title;
+    }
+
+    public String getVenue() {
+        return venue;
     }
 
     public String getTime() {
         return time;
     }
 
-    public String getVenue() {
-        return venue;
+    public String getTitle() {
+        return title;
     }
 }

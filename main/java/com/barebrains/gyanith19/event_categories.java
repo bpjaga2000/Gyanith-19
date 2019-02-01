@@ -33,6 +33,7 @@ public class event_categories extends AppCompatActivity {
     ArrayList<eventitem> items;
     eventitem it;
     ListView lvi;
+    ArrayList tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +64,14 @@ public class event_categories extends AppCompatActivity {
         ((TextView)findViewById(R.id.cattitle)).setText(i.getStringExtra("category"));
         s=i.getStringExtra("category");
         ada=new event_cat_ada(R.layout.eve_cat_item,items,this);
+        tag = new ArrayList();
         ref.child(s).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     it=new eventitem(snapshot.child("name").getValue().toString(),snapshot.child("timestamp").getValue().toString(),snapshot.getKey().toString());
                     items.add(it);
+                    tag.add(snapshot.getKey());
 
                 }
                 ((ProgressBar)findViewById(R.id.catload)).setVisibility(View.GONE);
@@ -87,7 +90,7 @@ public class event_categories extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 i1.putExtra("category",s);
-                i1.putExtra("tag",s.charAt(0)+Integer.toString(position+1));
+                i1.putExtra("tag",tag.get(position).toString());
                 startActivity(i1);
             }
         });

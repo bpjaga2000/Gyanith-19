@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class event_categories extends AppCompatActivity {
 
@@ -69,7 +70,7 @@ public class event_categories extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    it=new eventitem(snapshot.child("name").getValue().toString(),snapshot.child("timestamp").getValue().toString(),snapshot.getKey().toString());
+                    it=new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()),snapshot.getKey().toString());
                     items.add(it);
                     tag.add(snapshot.getKey());
 
@@ -98,5 +99,13 @@ public class event_categories extends AppCompatActivity {
         Intent n=new Intent("gyanith.notify");
         sendBroadcast(n);
 
+    }
+
+    public String timeFormatter(String time)
+    {
+        long timeInt = Long.parseLong(time);
+        String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(timeInt),
+                TimeUnit.MILLISECONDS.toMinutes(timeInt) % TimeUnit.HOURS.toMinutes(1));
+        return hms;
     }
 }

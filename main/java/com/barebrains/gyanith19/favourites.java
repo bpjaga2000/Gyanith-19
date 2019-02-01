@@ -29,6 +29,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class favourites extends Fragment {
@@ -74,7 +75,7 @@ public class favourites extends Fragment {
 
                             Log.i("tagy",snapshot.getKey());
                             if(sp.getBoolean(snapshot.getKey(),false)) {
-                                it = new eventitem(snapshot.child("name").getValue().toString(), snapshot.child("timestamp").getValue().toString(), snapshot.getKey());
+                                it = new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()), snapshot.getKey());
                                 items.add(it);
                                 tag.add(snapshot.getKey());
                             }
@@ -125,6 +126,12 @@ public class favourites extends Fragment {
         return root;
     }
 
-
+    public String timeFormatter(String time)
+    {
+        long timeInt = Long.parseLong(time);
+        String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(timeInt),
+                TimeUnit.MILLISECONDS.toMinutes(timeInt) % TimeUnit.HOURS.toMinutes(1));
+        return hms;
+    }
 
 }

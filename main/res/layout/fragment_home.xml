@@ -25,7 +25,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -96,7 +97,7 @@
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/spregu"
                             android:gravity="center_horizontal"
-                            android:text="Un-named category "
+                            android:text="About"
 
                             android:textColor="@android:color/white"
                             android:textSize="20sp" />
@@ -106,7 +107,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 

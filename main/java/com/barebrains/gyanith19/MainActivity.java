@@ -32,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
     PagerAdapter pagerAdapter;
     Fragment fragment;
     BottomNavigationView botnav;
-    List s= Arrays.asList("Gyanith19","Schedule","Favourites","Notification");
+    List s= Arrays.asList("Gyanith 19","Schedule","Favourites","Notifications");
     List itsl=Arrays.asList(R.id.navigation_home,R.id.navigation_schedule,R.id.navigation_favourites,R.id.navigation_notifications);
-    private TextView mTextMessage;
+    private TextView title;
    private FrameLayout parent;
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -45,16 +47,20 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    viewPager.setCurrentItem(0);
+                    replace(new home());
+                    title.setText("Gyanith 19");
                     return true;
                 case R.id.navigation_schedule:
-                    viewPager.setCurrentItem(1);
+                    replace(new schedule());
+                    title.setText("Schedule");
                     return true;
                 case R.id.navigation_favourites:
-                    viewPager.setCurrentItem(2);
+                    replace(new favourites());
+                    title.setText("Favourites");
                     return true;
                 case R.id.navigation_notifications:
-                    viewPager.setCurrentItem(3);
+                   replace(new notifications());
+                    title.setText("Notifications");
                     return true;
             }
             return false;
@@ -70,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
@@ -78,13 +90,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         botnav=findViewById(R.id.navigation);
-        viewPager=findViewById(R.id.gestureelement);
+        title=findViewById(R.id.title);
+        /*viewPager=findViewById(R.id.gestureelement);
         pagerAdapter= new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(0);
         viewPager.setOffscreenPageLimit(0);
 
-       /* if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+       if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
         }*/
@@ -107,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+       /* viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -156,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return numoffragments;
         }
-    }
+    }*/
 
 
-}
+}}

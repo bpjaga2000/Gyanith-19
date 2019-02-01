@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme.Noactionbar">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
@@ -31,15 +31,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".notreceiver">
             <intent-filter>
-
-                <action android:name="gyanith.notify"/>
+                <action android:name="gyanith.notify" />
             </intent-filter>
-
         </receiver>
 
-
+        <activity android:name=".about"></activity>
     </application>
 
 </manifest>

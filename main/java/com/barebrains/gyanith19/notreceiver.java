@@ -85,34 +85,36 @@ public class notreceiver extends BroadcastReceiver {
                 for(DataSnapshot chi:dataSnapshot.getChildren()){
                     for(DataSnapshot ich:chi.getChildren()){
                         if(ich.child("desc").exists()){
-                            if(sp.getBoolean(ich.getKey(),false)){
-                                Long st=Long.parseLong(ich.child("timestamp").getValue().toString());
-                                Long nt=st-900000;
-                                Calendar ca=Calendar.getInstance();
-                                if((ca.getTimeInMillis()<=st)&&(ca.getTimeInMillis()>=nt)){
+                            if(sp.getBoolean(ich.getKey(),false)) {
+                                if(sp.getString("gy"+ich.getKey(),"unotified").equals("unotified")){
 
 
-                                    NotificationCompat.Builder b=new NotificationCompat.Builder(context,"gyanith").setAutoCancel(true).setSmallIcon(R.drawable.gtrans).setContentTitle(ich.child("name").getValue().toString());
-                                    Date d=new Date(st);
-                                    SimpleDateFormat f=new SimpleDateFormat("hh:MM A");
-                                    b.setContentText("Starting at "+f.format(d));
-                                    if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-                                        int imp= NotificationManager.IMPORTANCE_DEFAULT;
-                                        NotificationChannel c=new NotificationChannel("gyanith","notification",imp);
-                                        NotificationManager noti=context.getSystemService(NotificationManager.class);
+                                Long st = Long.parseLong(ich.child("timestamp").getValue().toString());
+                                Long nt = st - 900000;
+                                Calendar ca = Calendar.getInstance();
+                                if ((ca.getTimeInMillis() <= st) && (ca.getTimeInMillis() >= nt)) {
+
+
+                                    NotificationCompat.Builder b = new NotificationCompat.Builder(context, "gyanith").setAutoCancel(true).setSmallIcon(R.drawable.gtrans).setContentTitle(ich.child("name").getValue().toString());
+                                    Date d = new Date(st);
+                                    SimpleDateFormat f = new SimpleDateFormat("hh:MM a");
+                                    b.setContentText("Starting at " + f.format(d));
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        int imp = NotificationManager.IMPORTANCE_DEFAULT;
+                                        NotificationChannel c = new NotificationChannel("gyanith", "notification", imp);
+                                        NotificationManager noti = context.getSystemService(NotificationManager.class);
                                         noti.createNotificationChannel(c);
                                     }
-                                    MediaPlayer mp=MediaPlayer.create(context,RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+                                    MediaPlayer mp = MediaPlayer.create(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
                                     mp.setLooping(false);
-                                    NotificationManagerCompat nmc=NotificationManagerCompat.from(context);
-                                    nmc.notify(1000,b.build());
+                                    NotificationManagerCompat nmc = NotificationManagerCompat.from(context);
+                                    nmc.notify(1000, b.build());
                                     mp.start();
 
 
-
-
-
                                 }
+                                sp.edit().putString("gy"+ich.getKey(),"notified");
+                            }
 
                             }
                         }

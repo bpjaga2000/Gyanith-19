@@ -25,7 +25,7 @@ public class splash extends AppCompatActivity {
         getWindow().setEnterTransition(new Fade());
         setContentView(R.layout.activity_splash);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         ImageView l=(ImageView)findViewById(R.id.imageView4);
 
 

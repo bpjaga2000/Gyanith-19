@@ -74,7 +74,7 @@ public class notifications extends Fragment {
                 for (DataSnapshot snapshot:dataSnapshot.getChildren())
                 {
                     item1 = new notificationItem(snapshot.child("sender").getValue().toString(), snapshot.child("time").getValue().toString(), snapshot.child("text").getValue().toString());
-                    arrListItem.add(item1);
+                    arrListItem.add(0,item1);
                     Log.d("qwer","noti");
                 }
                 madapter.notifyDataSetChanged();

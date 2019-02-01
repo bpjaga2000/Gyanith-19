@@ -34,6 +34,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
@@ -59,7 +61,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_gravity="bottom|right"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20dp"
                     android:background="@mipmap/ic_launcher_round"
                     android:backgroundTint="@color/cardbg"
                     android:elevation="5dp"
@@ -115,17 +117,40 @@
 
             </FrameLayout>
 
+            <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="@color/unselected">
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requisites" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact" />
+            </android.support.design.widget.TabLayout>
+
             <TextView
                 android:id="@+id/evedesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="80dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/pnreg"
-                android:text="A sample description about the event here but somewhat long for multiple lines"
+                android:text="kjj"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
         </LinearLayout>

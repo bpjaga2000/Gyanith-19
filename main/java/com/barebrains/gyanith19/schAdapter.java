@@ -39,12 +39,13 @@ public class schAdapter extends ArrayAdapter {
             root.setAlpha(0);
             Long delay = Long.valueOf(position * 150);
             ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
+            a.setDuration(300);
             a.setStartDelay(delay);
             a.start();
-            ObjectAnimator o = ObjectAnimator.ofFloat(root, "scaleX",0,1);
+            ObjectAnimator o = ObjectAnimator.ofFloat(root, "scaleX",1,2);
             o.setStartDelay(delay);
             o.setInterpolator(new DecelerateInterpolator());
-            o.setDuration(300);
+            o.setDuration(500);
             o.start();
            pos++;
         }

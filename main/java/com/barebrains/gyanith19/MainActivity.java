@@ -13,9 +13,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -70,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new Fade());
         setContentView(R.layout.main_layout);
+
 
         botnav=findViewById(R.id.navigation);
         viewPager=findViewById(R.id.gestureelement);
@@ -85,11 +90,12 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
 
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Fragment f=new home();
         FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-        ft.setTransitionStyle(FragmentTransaction.TRANSIT_ENTER_MASK);
+        ft.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.replace(R.id.mainframe,f).commit();
 
         ((TextView)findViewById(R.id.title)).setText("Gyanith 19");

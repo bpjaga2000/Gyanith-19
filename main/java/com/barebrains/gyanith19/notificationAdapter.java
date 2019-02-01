@@ -32,19 +32,7 @@ public class notificationAdapter extends ArrayAdapter {
         ((TextView) root.findViewById(R.id.notificationSender)).setText(list.get(position).getSender());
         ((TextView) root.findViewById(R.id.notificationTime)).setText(list.get(position).getTime());
         ((TextView) root.findViewById(R.id.notificationText)).setText(list.get(position).getText());
-        if (position==pos) {
 
-
-            root.setAlpha(0);
-            Long delay = Long.valueOf(position * 150);
-            ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
-            a.setStartDelay(delay);
-            a.setDuration(100);
-            a.start();
-
-
-            pos++;
-        }
 
 
         return root;

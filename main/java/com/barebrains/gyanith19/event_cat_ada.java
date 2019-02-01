@@ -62,7 +62,7 @@ public class event_cat_ada extends ArrayAdapter{
         ((TextView)root.findViewById(R.id.eveittime)).setText(ei.get(position).getTime());
         int id = c.getResources().getIdentifier("com.barebrains.gyanith19:drawable/" + ei.get(position).getTag().toLowerCase(), null, null);
         if(id!=0)
-            ((ImageView)root.findViewById(R.id.logo)).setBackgroundResource(id);
+            ((ImageView)root.findViewById(R.id.logo)).setImageResource(id);
         return root;
     }
 }

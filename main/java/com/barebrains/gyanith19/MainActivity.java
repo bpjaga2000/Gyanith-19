@@ -21,6 +21,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -116,8 +117,9 @@ public class MainActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.account)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(i);
+                Toast.makeText(MainActivity.this,"Will be updated soon",Toast.LENGTH_LONG).show();
+               // Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+               // startActivity(i);
             }
         });
        /* viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

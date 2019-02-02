@@ -103,7 +103,7 @@ public class event_categories extends AppCompatActivity {
     public String timeFormatter(String time)
     {
         long timeInt = Long.parseLong(time);
-        SimpleDateFormat s=new SimpleDateFormat("dd mm");
+        SimpleDateFormat s=new SimpleDateFormat("MMM dd");
 
         Calendar c=Calendar.getInstance();
         c.setTimeInMillis(timeInt);

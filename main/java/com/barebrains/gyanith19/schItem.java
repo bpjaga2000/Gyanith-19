@@ -1,13 +1,13 @@
 package com.barebrains.gyanith19;
 
-public class schitem {
+public class schItem {
 
     String venue,time,title;
 
-    public schitem() {
+    public schItem() {
     }
 
-    public schitem(String venue, String time, String title) {
+    public schItem(String title, String time, String venue) {
         this.venue = venue;
         this.time = time;
         this.title = title;

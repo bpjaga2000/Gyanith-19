@@ -35,10 +35,9 @@
             android:orientation="vertical">
 
 
-
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="272dp"
                 android:layout_weight="1">
 
                 <ImageView
@@ -58,27 +57,29 @@
 
 
                 <FrameLayout
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="bottom|right"
                     android:layout_marginRight="20dp"
                     android:background="@mipmap/ic_launcher_round"
                     android:backgroundTint="@color/cardbg"
                     android:elevation="5dp"
-                    android:paddingBottom="10.5dp"
                     android:paddingLeft="9dp"
+                    android:paddingTop="10.5dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="10.5dp">
+                    android:paddingBottom="10.5dp">
 
                     <ToggleButton
                         android:id="@+id/favButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:background="@null"
                         android:button="@drawable/toggle_button"
                         android:checked="false"
                         android:foregroundGravity="center"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
                         android:text=""
                         android:textOff=""
                         android:textOn="" />
@@ -90,8 +91,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
                     android:background="?attr/homeAsUpIndicator"
                     android:backgroundTint="@android:color/white"
                     android:foreground="?attr/selectableItemBackground" />

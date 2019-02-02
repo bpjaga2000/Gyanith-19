@@ -1,14 +1,11 @@
 package com.barebrains.gyanith19;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.transition.Explode;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -23,8 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+import java.util.Calendar;
+import java.util.Date;
 
 public class event_categories extends AppCompatActivity {
 
@@ -104,8 +103,16 @@ public class event_categories extends AppCompatActivity {
     public String timeFormatter(String time)
     {
         long timeInt = Long.parseLong(time);
-        String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(timeInt),
-                TimeUnit.MILLISECONDS.toMinutes(timeInt) % TimeUnit.HOURS.toMinutes(1));
-        return hms;
+        SimpleDateFormat s=new SimpleDateFormat("dd mm");
+
+        Calendar c=Calendar.getInstance();
+        c.setTimeInMillis(timeInt);
+        if(c.getTime().getDate()== Calendar.getInstance().getTime().getDate())
+            return "Today";
+        else if(c.getTime().getDate()== Calendar.getInstance().getTime().getDate()+1)
+            return "Tommorow";
+
+        Date d=new Date(timeInt);
+        return s.format(d);
     }
 }

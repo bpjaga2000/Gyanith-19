@@ -71,7 +71,7 @@ public class event_details extends AppCompatActivity {
                     desc.setText(dataSnapshot.child("desc").getValue().toString());
                     int id = getResources().getIdentifier("com.barebrains.gyanith19:drawable/" + tag.toLowerCase()+'b', null, null);
                     if(id!=0)
-                    ((ImageView)findViewById(R.id.eveimv)).setImageResource(id);
+                    ((ImageView)findViewById(R.id.eveimv)).setBackgroundResource(id);
             }
 
             @Override

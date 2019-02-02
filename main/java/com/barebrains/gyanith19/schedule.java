@@ -17,7 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 
@@ -118,8 +120,8 @@ public class schedule extends Fragment {
     public String timeFormatter(String time)
     {
         long timeInt = Long.parseLong(time);
-        String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(timeInt),
-                TimeUnit.MILLISECONDS.toMinutes(timeInt) % TimeUnit.HOURS.toMinutes(1));
-        return hms;
+        SimpleDateFormat s=new SimpleDateFormat("HH:MM");
+        Date d=new Date(timeInt);
+        return s.format(d);
     }
 }

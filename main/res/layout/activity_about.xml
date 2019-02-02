@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bggy"
+    android:background="@color/topb"
     tools:context=".about">
 
     <android.support.design.widget.FloatingActionButton
@@ -83,113 +83,45 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_baseline_add_24px" />
 
-    <Button
-        android:id="@+id/backabt"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/homeAsUpIndicator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView10"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:fontFamily="@font/sofiaprolight"
-                android:gravity="center"
-                android:text="NIT PUDUCHERRY"
-                android:textSize="20sp" />
+                android:layout_height="300dp">
+
+                <Button
+                    android:id="@+id/backabt"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?attr/homeAsUpIndicator"
+                    android:backgroundTint="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:srcCompat="@android:color/black" />
+            </FrameLayout>
 
             <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sofiaprolight"
-                android:gravity="center"
-                android:text="Gyanith 19"
-                android:textColor="@android:color/white"
-                android:textSize="40sp" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:fontFamily="@font/sofiaprolight"
-                android:gravity="center"
-                android:text="Feb 28 - Mar 2"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/descr"
+                android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/pnreg"
-                android:text="Gyanith "
-                android:textColor="@color/whitealpha"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/sofiaprolight"
-                android:gravity="center"
-                android:text="Connect with us"
+                android:text="Gyanith is annual technical fest of NIT-Puducherry"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/fbicon" />
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/insta" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/webicon"
-                    android:backgroundTint="@android:color/white" />
-            </LinearLayout>
+                android:textSize="18sp" />
 
         </LinearLayout>
     </ScrollView>

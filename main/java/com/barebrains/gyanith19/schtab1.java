@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -26,9 +28,9 @@ public class schtab1 extends Fragment {
 
     private ListView scheduleList;
     private DatabaseReference ref;
-    private schItem it1;
+    private schitem it1;
     private schAdapter adapter;
-    private ArrayList<schItem> list;
+    private ArrayList<schitem> list;
 
     public schtab1() {
         // Required empty public constructor
@@ -44,11 +46,11 @@ public class schtab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_schtab1, container, false);
+        final View root = inflater.inflate(R.layout.fragment_schtab1, container, false);
 
         scheduleList = root.findViewById(R.id.sch1);
         ref = FirebaseDatabase.getInstance().getReference().child("schedule");
-        list = new ArrayList<schItem>();
+        list = new ArrayList<schitem>();
         adapter = new schAdapter(getContext(), list, R.layout.schitem);
 
         ref.child("day0").addValueEventListener(new ValueEventListener() {
@@ -56,11 +58,25 @@ public class schtab1 extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    it1 = new schItem(snapshot.child("name").getValue().toString(), timeFormatter(snapshot.child("startTime").getValue().toString()), snapshot.child("venue").getValue().toString());
+                    String starttime = snapshot.child("startTime").getValue().toString();//timeFormatter("gsadg");
+                    String endtime = snapshot.child("endTime").getValue().toString();
+
+                    Long now = Calendar.getInstance().getTimeInMillis();
+                    Long start = Long.parseLong(starttime);
+                    Long end = Long.parseLong(endtime);
+                    Boolean live;
+
+                    if(now >= start && now <= end ) live = true;
+                    else live = false;
+
+                    it1 = new schitem(snapshot.child("name").getValue().toString(), timeFormatter(start), snapshot.child("venue").getValue().toString(), live );
                     list.add(it1);
                 }
                 adapter.notifyDataSetChanged();
                 schedule.gone();
+
+                if (list.isEmpty()) ((TextView)root.findViewById(R.id.update1)).setVisibility(View.VISIBLE);
+                else ((TextView)root.findViewById(R.id.update1)).setVisibility(View.GONE);
             }
 
             @Override
@@ -74,14 +90,12 @@ public class schtab1 extends Fragment {
         return root;
     }
 
-    public String timeFormatter(String time)
+    public String timeFormatter(Long timeInt)
     {
-        long timeInt = Long.parseLong(time);
         SimpleDateFormat s=new SimpleDateFormat("HH:MM");
         Date d=new Date(timeInt);
         return s.format(d);
     }
-
 
 }
 

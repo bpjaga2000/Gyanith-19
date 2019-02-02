@@ -67,6 +67,22 @@
                         android:text="Main Stage"
                         android:textColor="@color/whitealpha" />
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/liveindicator"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="top|right"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@android:color/holo_green_light"
+                    android:visibility="invisible" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

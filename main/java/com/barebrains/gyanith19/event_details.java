@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
@@ -79,7 +78,6 @@ public class event_details extends AppCompatActivity {
                             desc.setText(tab1);
                         }
                         if(snapshot.getKey().toString().charAt(0)=='2'){
-                            dtab.getTabAt(1).setText(snapshot.getKey().substring(1));
                             tab2=snapshot.getValue().toString();
                         }
                         if(snapshot.getKey().toString().charAt(0)=='3'){
@@ -145,13 +143,6 @@ public class event_details extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
-
-        ((Button)findViewById(R.id.reg)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(event_details.this,"Registrations opening shortly",Toast.LENGTH_LONG);
             }
         });
 

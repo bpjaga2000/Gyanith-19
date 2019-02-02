@@ -122,7 +122,7 @@ public class schedule extends Fragment {
 
     public static void gone(){
         ((ProgressBar)gone.findViewById(R.id.schload)).setVisibility(View.GONE);
-        ((TextView)gone.findViewById(R.id.up)).setVisibility(View.GONE);
+        //((TextView)gone.findViewById(R.id.up)).setVisibility(View.GONE);
     }
 
 }

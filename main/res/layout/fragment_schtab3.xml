@@ -5,8 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".schtab3">
 
+    <TextView
+        android:id="@+id/update3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/pnbold"
+        android:gravity="center"
+        android:text="Yet to be updated"
+        android:textColor="#96ffffff"
+        android:textSize="36sp"
+        android:visibility="gone" />
+
     <ListView
         android:id="@+id/sch3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null" />
 </FrameLayout>

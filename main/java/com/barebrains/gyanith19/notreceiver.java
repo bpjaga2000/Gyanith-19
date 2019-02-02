@@ -61,7 +61,7 @@ public class notreceiver extends BroadcastReceiver {
                         NotificationManager noti=context.getSystemService(NotificationManager.class);
                         noti.createNotificationChannel(c);
                     }
-                    MediaPlayer mp=MediaPlayer.create(context,R.raw.noti);
+                    MediaPlayer mp=MediaPlayer.create(context,RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
                     mp.setLooping(false);
                     NotificationManagerCompat nmc=NotificationManagerCompat.from(context);
                     nmc.notify(1000,b.build());
@@ -105,7 +105,7 @@ public class notreceiver extends BroadcastReceiver {
                                         NotificationManager noti = context.getSystemService(NotificationManager.class);
                                         noti.createNotificationChannel(c);
                                     }
-                                    MediaPlayer mp = MediaPlayer.create(context,R.raw.noti);
+                                    MediaPlayer mp = MediaPlayer.create(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
                                     mp.setLooping(false);
                                     NotificationManagerCompat nmc = NotificationManagerCompat.from(context);
                                     nmc.notify(1000, b.build());

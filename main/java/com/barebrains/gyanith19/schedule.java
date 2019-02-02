@@ -67,6 +67,7 @@ public class schedule extends Fragment {
                 viewPager.setCurrentItem(a);
             }
 
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
@@ -82,10 +83,15 @@ public class schedule extends Fragment {
     }
 
     public class pager extends FragmentStatePagerAdapter{
-        int tabs;
+
+        private String[] tabTitles = new String[]{"Live", "Day 0", "Day 1","Day 2"};
+
         public pager(FragmentManager fm,int tabs) {
             super(fm);
-            this.tabs=tabs;
+        }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
         }
 
         @Override
@@ -110,7 +116,7 @@ public class schedule extends Fragment {
 
         @Override
         public int getCount() {
-            return tabs;
+            return tabTitles.length;
         }
     }
 

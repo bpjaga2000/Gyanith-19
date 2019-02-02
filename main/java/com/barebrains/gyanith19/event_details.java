@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
@@ -25,13 +26,15 @@ import com.google.firebase.database.ValueEventListener;
 public class event_details extends AppCompatActivity {
 
     TextView title,desc;
-    ImageView eveimage,back;
+    ImageView eveimage;
     ToggleButton favtb;
     DatabaseReference reference;
     Intent intent;
     String child,tag;
+    TabLayout dtab;
     SharedPreferences sp;
     Button bb2;
+    String tab1,tab2,tab3;
 
 
     @Override
@@ -51,6 +54,7 @@ public class event_details extends AppCompatActivity {
         tag= intent.getStringExtra("tag");
         title=findViewById(R.id.evedttitle);
         desc=findViewById(R.id.evedesc);
+        dtab=findViewById(R.id.dtab);
 
         eveimage=findViewById(R.id.eveimv);
         favtb=findViewById(R.id.favButton);
@@ -68,7 +72,18 @@ public class event_details extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     title.setText(dataSnapshot.child("name").getValue().toString());
-                    desc.setText(dataSnapshot.child("desc").getValue().toString());
+                    for(DataSnapshot snapshot:dataSnapshot.child("details").getChildren()){
+                        if(snapshot.getKey().toString().charAt(0)=='1'){
+                            tab1=snapshot.getValue().toString();
+                            desc.setText(tab1);
+                        }
+                        if(snapshot.getKey().toString().charAt(0)=='2'){
+                            tab2=snapshot.getValue().toString();
+                        }
+                        if(snapshot.getKey().toString().charAt(0)=='3'){
+                            tab3=snapshot.getValue().toString();
+                        }
+                    }
                     int id = getResources().getIdentifier("com.barebrains.gyanith19:drawable/" + tag.toLowerCase()+'b', null, null);
                     if(id!=0)
                     ((ImageView)findViewById(R.id.eveimv)).setBackgroundResource(id);
@@ -98,6 +113,36 @@ public class event_details extends AppCompatActivity {
                     fa2.start();
 
                 }
+            }
+        });
+
+
+
+
+        dtab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int a=tab.getPosition();
+                if(a==0){
+                    desc.setText(tab1);
+                }
+                if(a==1){
+                    desc.setText(tab2);
+                }
+                if(a==2){
+                    desc.setText(tab3);
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 

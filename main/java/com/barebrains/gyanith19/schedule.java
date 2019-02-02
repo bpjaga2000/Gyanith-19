@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +30,15 @@ import java.util.concurrent.TimeUnit;
 
 public class schedule extends Fragment {
 
-    private ListView scheduleList;
-    private DatabaseReference ref;
-    private schItem it1;
-    private schAdapter d1,d2;
-    private ArrayList<schItem> itemd1, itemd2;
     private TabLayout mtabLayout;
+    private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
+    private static View gone;
 
     public schedule() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,61 +50,21 @@ public class schedule extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View root= inflater.inflate(R.layout.fragment_schedule, container, false);
-        scheduleList = root.findViewById(R.id.schlv);
-        ref = FirebaseDatabase.getInstance().getReference().child("schedule");
-        itemd1 = new ArrayList<schItem>();
-        itemd2 = new ArrayList<schItem>();
 
-        d1 = new schAdapter(getContext(), itemd1, R.layout.schitem);
-        d2 = new schAdapter(getContext(), itemd2, R.layout.schitem);
-
+        gone=root;
         mtabLayout = root.findViewById(R.id.schtabLayout);
+        viewPager=root.findViewById(R.id.viewpager);
+        pagerAdapter=new pager(getActivity().getSupportFragmentManager(),mtabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(0);
+        mtabLayout.setupWithViewPager(viewPager);
 
-        ref.child("day0").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    it1 = new schItem(snapshot.child("name").getValue().toString(), timeFormatter(snapshot.child("startTime").getValue().toString()), snapshot.child("venue").getValue().toString());
-                    itemd1.add(it1);
-                }
-                d1.notifyDataSetChanged();
-                ((ProgressBar)root.findViewById(R.id.schload)).setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        ref.child("day1").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    it1 = new schItem(snapshot.child("name").getValue().toString(), timeFormatter(snapshot.child("startTime").getValue().toString()), snapshot.child("venue").getValue().toString());
-                    itemd2.add(it1);
-                }
-                d2.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        scheduleList.setAdapter(d1);
 
         mtabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int a = tab.getPosition();
-                if(a == 0)
-                    scheduleList.setAdapter(d1);
-                else
-                    scheduleList.setAdapter(d2);
+                viewPager.setCurrentItem(a);
             }
 
             @Override
@@ -117,11 +81,42 @@ public class schedule extends Fragment {
         return root;
     }
 
-    public String timeFormatter(String time)
-    {
-        long timeInt = Long.parseLong(time);
-        SimpleDateFormat s=new SimpleDateFormat("HH:MM");
-        Date d=new Date(timeInt);
-        return s.format(d);
+    public class pager extends FragmentStatePagerAdapter{
+        int tabs;
+        public pager(FragmentManager fm,int tabs) {
+            super(fm);
+            this.tabs=tabs;
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            Fragment fragment=new schtab0();
+            switch (i){
+                case 0:
+                    fragment=new schtab0();
+                    break;
+                case 1:
+                    fragment=new schtab1();
+                    break;
+                case 2:
+                    fragment=new schtab2();
+                    break;
+                case 3:
+                    fragment=new schtab3();
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return tabs;
+        }
     }
+
+    public static void gone(){
+        ((ProgressBar)gone.findViewById(R.id.schload)).setVisibility(View.GONE);
+        ((TextView)gone.findViewById(R.id.up)).setVisibility(View.GONE);
+    }
+
 }

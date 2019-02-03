@@ -35,8 +35,9 @@ public class event_details extends AppCompatActivity {
     String child,tag;
     TabLayout dtab;
     SharedPreferences sp;
-    Button bb2,register;
+    Button bb2;
     String tab1,tab2,tab3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,6 @@ public class event_details extends AppCompatActivity {
         eveimage=findViewById(R.id.eveimv);
         favtb=findViewById(R.id.favButton);
 
-        register = findViewById(R.id.registerbut);
         bb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +80,7 @@ public class event_details extends AppCompatActivity {
                             desc.setText(tab1);
                         }
                         if(snapshot.getKey().toString().charAt(0)=='2'){
+                            dtab.getTabAt(1).setText(snapshot.getKey().substring(1));
                             tab2=snapshot.getValue().toString();
                         }
                         if(snapshot.getKey().toString().charAt(0)=='3'){
@@ -148,12 +149,13 @@ public class event_details extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.reg)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                Toast.makeText(event_details.this,"Registrations opening shortly",Toast.LENGTH_LONG).show();
             }
         });
+
 
 
     }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/pnreg"
+        android:text="Feedback"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/pnreg"
+        android:text="Rate your experience at Gyanith"
+        android:textSize="18sp" />
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:stepSize="1" />
+
+    <EditText
+        android:id="@+id/feedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="200"
+        android:fontFamily="@font/pnreg"
+        android:hint="Write your feedback here"
+        android:inputType="textPersonName" />
+
+</LinearLayout>

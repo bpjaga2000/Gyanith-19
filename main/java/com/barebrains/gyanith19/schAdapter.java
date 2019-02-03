@@ -39,6 +39,7 @@ public class schAdapter extends ArrayAdapter {
         }else ((ImageView)root.findViewById(R.id.liveindicator)).setVisibility(View.INVISIBLE);
         if (position==pos) {
 
+
             root.setAlpha(0);
             Long delay = Long.valueOf(position * 150);
             ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);

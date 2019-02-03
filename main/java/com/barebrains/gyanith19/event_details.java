@@ -1,6 +1,7 @@
 package com.barebrains.gyanith19;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +35,8 @@ public class event_details extends AppCompatActivity {
     String child,tag;
     TabLayout dtab;
     SharedPreferences sp;
-    Button bb2;
+    Button bb2,register;
     String tab1,tab2,tab3;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class event_details extends AppCompatActivity {
         eveimage=findViewById(R.id.eveimv);
         favtb=findViewById(R.id.favButton);
 
+        register = findViewById(R.id.registerbut);
         bb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +148,12 @@ public class event_details extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }

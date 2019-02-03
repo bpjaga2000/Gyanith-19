@@ -57,8 +57,10 @@ public class schtab0 extends Fragment {
         ref.child("day0").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
+
                     String starttime = snapshot.child("startTime").getValue().toString();//timeFormatter("gsadg");
                     String endtime = snapshot.child("endTime").getValue().toString();
 

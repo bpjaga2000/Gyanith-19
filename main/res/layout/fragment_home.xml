@@ -41,6 +41,12 @@
                         app:cardBackgroundColor="#f22613"
                         app:cardCornerRadius="5dp">
 
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/workshops" />
+
                         <TextView
                             android:id="@+id/wt"
                             android:layout_width="wrap_content"
@@ -63,6 +69,12 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="#19b5fe"
                         app:cardCornerRadius="5dp">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/nontecheve" />
 
                         <TextView
                             android:id="@+id/ntet"
@@ -88,6 +100,12 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="#7b1fa2"
                         app:cardCornerRadius="5dp">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/about" />
 
                         <TextView
                             android:id="@+id/udt"
@@ -123,6 +141,12 @@
                         app:cardBackgroundColor="#5b3256"
                         app:cardCornerRadius="5dp">
 
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/techevents" />
+
                         <TextView
                             android:id="@+id/tet"
                             android:layout_width="match_parent"
@@ -148,6 +172,12 @@
                         app:cardBackgroundColor="#03a678"
                         app:cardCornerRadius="5dp">
 
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/proshows" />
+
                         <TextView
                             android:id="@+id/pst"
                             android:layout_width="wrap_content"
@@ -172,6 +202,12 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="#f62952"
                         app:cardCornerRadius="5dp">
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/guestl" />
 
                         <TextView
                             android:id="@+id/glt"

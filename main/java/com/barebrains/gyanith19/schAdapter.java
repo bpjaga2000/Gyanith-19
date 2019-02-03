@@ -41,7 +41,7 @@ public class schAdapter extends ArrayAdapter {
 
 
             root.setAlpha(0);
-            Long delay = Long.valueOf(position * 150);
+            Long delay = Long.valueOf(position * 100);
             ObjectAnimator a = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
             a.setDuration(300);
             a.setStartDelay(delay);

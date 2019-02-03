@@ -93,6 +93,9 @@ public class home extends Fragment {
             }
         });
 
+        Intent n=new Intent("gyanith.notify");
+        getContext().sendBroadcast(n);
+
 
         CardView w=(CardView)root.findViewById(R.id.w);
         CardView te=(CardView)root.findViewById(R.id.te);

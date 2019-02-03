@@ -13,9 +13,9 @@
         android:layout_marginBottom="40dp"
         android:fontFamily="@font/pnbold"
         android:gravity="center"
-        android:text="Nothing live !"
+        android:text="No events live currently"
         android:textColor="#96ffffff"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:visibility="gone" />
 
     <ListView

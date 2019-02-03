@@ -68,12 +68,20 @@ public class event_categories extends AppCompatActivity {
         ref.child(s).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                items.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    it=new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()),snapshot.getKey().toString());
-                    items.add(it);
-                    tag.add(snapshot.getKey());
+                    try{
+                        it=new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()),snapshot.getKey().toString());
+                        items.add(it);
+                        tag.add(snapshot.getKey());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
 
                 }
+                if(items.isEmpty()) ((TextView)findViewById(R.id.textView14)).setVisibility(View.VISIBLE);
+                else ((TextView)findViewById(R.id.textView14)).setVisibility(View.GONE);
                 ((ProgressBar)findViewById(R.id.catload)).setVisibility(View.GONE);
                 ada.notifyDataSetChanged();
             }
@@ -95,15 +103,14 @@ public class event_categories extends AppCompatActivity {
             }
         });
 
-        Intent n=new Intent("gyanith.notify");
-        sendBroadcast(n);
+
 
     }
 
     public String timeFormatter(String time)
     {
         long timeInt = Long.parseLong(time);
-        SimpleDateFormat s=new SimpleDateFormat("dd mm");
+        SimpleDateFormat s=new SimpleDateFormat("MMM dd");
 
         Calendar c=Calendar.getInstance();
         c.setTimeInMillis(timeInt);

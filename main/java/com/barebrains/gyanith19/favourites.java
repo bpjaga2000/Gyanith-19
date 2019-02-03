@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -69,18 +70,32 @@ public class favourites extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                items.clear();
                 for(DataSnapshot sh:dataSnapshot.getChildren()){
                     for(DataSnapshot snapshot:sh.getChildren()){
                         if(snapshot.child("desc").exists()){
 
                             Log.i("tagy",snapshot.getKey());
                             if(sp.getBoolean(snapshot.getKey(),false)) {
-                                it = new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()), snapshot.getKey());
-                                items.add(it);
-                                tag.add(snapshot.getKey());
+                                try{
+                                    it = new eventitem(snapshot.child("name").getValue().toString(),timeFormatter(snapshot.child("timestamp").getValue().toString()), snapshot.getKey());
+                                    items.add(it);
+                                    //((TextView)root.findViewById(R.id.textView13)).setVisibility(View.GONE);
+                                    tag.add(snapshot.getKey());
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+
                             }
                         }
+
                         ((ProgressBar)root.findViewById(R.id.favload)).setVisibility(View.GONE);
+                        if(items.isEmpty()){
+                            ((TextView)root.findViewById(R.id.textView13)).setVisibility(View.VISIBLE);
+
+                        }else((TextView)root.findViewById(R.id.textView13)).setVisibility(View.GONE);
+
                         ada.notifyDataSetChanged();
                     }
                 }

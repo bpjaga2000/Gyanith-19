@@ -114,7 +114,7 @@ public class about extends AppCompatActivity {
                 b.setNeutralButton("Rate us", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent w=new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp"));
+                        Intent w=new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=com.barebrains.gyanith19"));
                         startActivity(w);
                     }
                 });
@@ -127,7 +127,7 @@ public class about extends AppCompatActivity {
             public void onClick(View view) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBody = "Check out the Gyanith app\n https://play.google.com/store/apps/details?id=com.whatsapp";
+                String shareBody = "Check out the Gyanith app\n https://play.google.com/store/apps/details?id=com.barebrains.gyanith19";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Download Gyanith app");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));

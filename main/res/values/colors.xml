@@ -11,5 +11,5 @@
     <color name="whitealpha">#b4ffffff</color>
     <color name="redd">#ff0111</color>
     <color name="cardbg">#373748</color>
-    <color name="unselected">#64ffffff</color>
+    <color name="unselected">#64FFFFFF</color>
 </resources>

@@ -1,45 +1,29 @@
 package com.barebrains.gyanith19;
 
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
-    int numoffragments=4;
-    ViewPager viewPager;
-    PagerAdapter pagerAdapter;
-    Fragment fragment;
     BottomNavigationView botnav;
-    List s= Arrays.asList("Gyanith 19","Schedule","Favourites","Notifications");
-    List itsl=Arrays.asList(R.id.navigation_home,R.id.navigation_schedule,R.id.navigation_favourites,R.id.navigation_notifications);
     private TextView title;
-   private FrameLayout parent;
-
-
-
+    boolean doubleBackToExitPressedOnce;
+    private ImageView imageView;
+    Context context;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,30 +62,35 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setEnterTransition(new Fade());
         setContentView(R.layout.main_layout);
+        doubleBackToExitPressedOnce = false;
+        imageView=findViewById(R.id.topbaricon);
+        context=this;
 
 
         botnav=findViewById(R.id.navigation);
         title=findViewById(R.id.title);
-        /*viewPager=findViewById(R.id.gestureelement);
-        pagerAdapter= new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOffscreenPageLimit(0);
-
-       if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
-        }*/
 
 
 
@@ -117,61 +106,21 @@ public class MainActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.account)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            	Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_LONG).show();
+            	Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_SHORT).show();
                 //Intent i=new Intent(getApplicationContext(),LoginActivity.class);
                 //startActivity(i);
             }
         });
-       /* viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                ((TextView)findViewById(R.id.title)).setText(s.get(i).toString());
-                botnav.setSelectedItemId(Integer.parseInt(itsl.get(i).toString()));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
+            public void onClick(View v) {
+                Toast.makeText(context,"Presented to you by HV,BP,KR,RP,AM",Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
-
-    public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            fragment=null;
-            switch (i) {
-                case 0:
-                    fragment = new home();
-                    break;
-                case 1:
-                    fragment = new schedule();
-                    break;
-                case 2:
-                    fragment = new favourites();
-                    break;
-                case 3:
-                    fragment = new notifications();
-                    break;
-            }
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return numoffragments;
-        }
-    }*/
 
 
-}}
+}
+
+}

@@ -1,7 +1,5 @@
 package com.barebrains.gyanith19;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -9,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class schtab0 extends Fragment {
@@ -69,8 +65,7 @@ public class schtab0 extends Fragment {
                     Long end = Long.parseLong(endtime);
 
                     if(now >= start && now <= end ){
-                        it1 = new schitem(snapshot.child("name").getValue().toString(),
-                                timeFormatter(start), snapshot.child("venue").getValue().toString(), true );
+                        it1 = new schitem(snapshot.child("venue").getValue().toString(),timeFormatter(start),snapshot.child("name").getValue().toString(), true );
                         list.add(it1);
                     }
                 }

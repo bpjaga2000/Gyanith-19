@@ -15,14 +15,12 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="120dp"
+            android:layout_width="170dp"
             android:layout_height="120dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/gtrans"
-            android:backgroundTint="@android:color/white"
-            android:tint="@android:color/white"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/l2"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

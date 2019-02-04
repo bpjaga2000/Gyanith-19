@@ -27,8 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -144,9 +147,17 @@ public class favourites extends Fragment {
     public String timeFormatter(String time)
     {
         long timeInt = Long.parseLong(time);
-        String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(timeInt),
-                TimeUnit.MILLISECONDS.toMinutes(timeInt) % TimeUnit.HOURS.toMinutes(1));
-        return hms;
+        SimpleDateFormat s=new SimpleDateFormat("MMM dd");
+
+        Calendar c=Calendar.getInstance();
+        c.setTimeInMillis(timeInt);
+        if(c.getTime().getDate()== Calendar.getInstance().getTime().getDate())
+            return "Today";
+        else if(c.getTime().getDate()== Calendar.getInstance().getTime().getDate()+1)
+            return "Tommorow";
+
+        Date d=new Date(timeInt);
+        return s.format(d);
     }
 
 }

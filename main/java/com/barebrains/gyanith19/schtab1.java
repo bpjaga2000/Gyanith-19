@@ -70,7 +70,7 @@ public class schtab1 extends Fragment {
                     if(now >= start && now <= end ) live = true;
                     else live = false;
 
-                    it1 = new schitem(snapshot.child("name").getValue().toString(), timeFormatter(start), snapshot.child("venue").getValue().toString(), live );
+                    it1 = new schitem(snapshot.child("venue").getValue().toString(),timeFormatter(start),snapshot.child("name").getValue().toString(), live );
                     list.add(it1);
                 }
                 adapter.notifyDataSetChanged();

@@ -23,6 +23,15 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/topbaricon"
+                    android:layout_width="55dp"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/l2" />
+
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"

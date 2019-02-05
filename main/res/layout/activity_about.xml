@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/topbar"
+    android:background="@drawable/abbg1"
     tools:context=".about">
 
     <android.support.design.widget.FloatingActionButton
@@ -138,6 +138,7 @@
                 android:fontFamily="@font/sofiaprolight"
                 android:gravity="center"
                 android:text="Feb 28 - Mar 2"
+                android:textColor="#EEEEEE"
                 android:textSize="18sp" />
 
             <TextView

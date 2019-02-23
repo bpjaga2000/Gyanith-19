@@ -1,9 +1,13 @@
 package com.barebrains.gyanith19;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,16 +112,16 @@ public class MainActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.account)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            	Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_SHORT).show();
-                //Intent i=new Intent(getApplicationContext(),LoginActivity.class);
-                //startActivity(i);
+            	//Toast.makeText(getApplicationContext(), "Will be updated soon!", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
             }
         });
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Presented to you by HV,BP,KR,RP,AM",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Presented to you by HV,BP,KR,SR,AM",Toast.LENGTH_SHORT).show();
             }
         });
 

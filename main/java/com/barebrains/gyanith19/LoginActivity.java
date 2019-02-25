@@ -1,8 +1,10 @@
 package com.barebrains.gyanith19;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -166,7 +168,25 @@ public class LoginActivity extends AppCompatActivity  {
         });
 
 
-
+        ((TextView)findViewById(R.id.signouttv)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this)
+                        .setIcon(R.drawable.signout)
+                        .setTitle("Sign Out?")
+                        .setMessage("Are you sure you want to sign out?")
+                        .setPositiveButton("Sign out", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ((FrameLayout) findViewById(R.id.userdetails)).setVisibility(View.GONE);
+                                ((ScrollView) findViewById(R.id.sign)).setVisibility(View.VISIBLE);
+                                Toast.makeText(getApplicationContext(), "User signed out!", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
 
         ((CardView)findViewById(R.id.qrcard)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,8 +278,7 @@ public class LoginActivity extends AppCompatActivity  {
                                     eventll.addView(tv);
                                 }
                                 for (int i=0; i<eventscount; i++){
-                                    JSONObject object = events.getJSONObject(i);
-                                    String event = object.getString(String.valueOf(i));
+                                    String event = events.getString(i);
                                     Log.i("JSONN", event );
                                     qrdata = qrdata + " " + event + ",";
                                     TextView tv = new TextView(getApplicationContext());
@@ -280,8 +299,7 @@ public class LoginActivity extends AppCompatActivity  {
                                     workshopll.addView(tv);
                                 }
                                 for (int i=0; i<workshopcount; i++){
-                                    JSONObject object = workshops.getJSONObject(i);
-                                    String work = object.getString(String.valueOf(i));
+                                    String work = workshops.getString(i);
                                     Log.i("JSONN", work);
                                     qrdata = qrdata + " " + work + ",";
                                     TextView tv = new TextView(getApplicationContext());

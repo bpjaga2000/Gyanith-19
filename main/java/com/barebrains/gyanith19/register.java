@@ -98,9 +98,7 @@ public class register extends AppCompatActivity {
         Log.i("REGISTERTOKEN1", token + "poda");
         s="https://gyanith.org/register_form.php?id="+id+"&q="+token;
 
-        if(ex.equals("Tg"))
-            s="https://gyanith.org/assets/files/topics.pdf";
-        else if(ex.equals("W7"))
+        if(ex.equals("W7"))
             s="https://www.thecollegefever.com/events/3d-printing-workshop-cOWPj0G8sy";
 
         webview.setWebViewClient(new WebViewClient(){

@@ -3,6 +3,7 @@ package com.barebrains.gyanith19;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,25 +53,28 @@ public class schtab0 extends Fragment {
         list = new ArrayList<schitem>();
         adapter = new schAdapter(getContext(), list, R.layout.schitem);
 
-        ref.child("day0").addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
+                for(DataSnapshot snapshot1:dataSnapshot.getChildren()) {
+                    for (DataSnapshot snapshot : snapshot1.getChildren()) {
 
-                    String starttime = snapshot.child("startTime").getValue().toString();//timeFormatter("gsadg");
-                    String endtime = snapshot.child("endTime").getValue().toString();
+                        String starttime = snapshot.child("startTime").getValue().toString();//timeFormatter("gsadg");
+                        String endtime = snapshot.child("endTime").getValue().toString();
 
-                    Long now = Calendar.getInstance().getTimeInMillis();
-                    Long start = Long.parseLong(starttime);
-                    Long end = Long.parseLong(endtime);
+                        Long now = Calendar.getInstance().getTimeInMillis();
+                        Long start = Long.parseLong(starttime);
+                        Long end = Long.parseLong(endtime);
 
-                    if(now >= start && now <= end ){
-                        it1 = new schitem(snapshot.child("venue").getValue().toString(),timeFormatter(start),snapshot.child("name").getValue().toString(), true );
-                        list.add(it1);
+                        Log.i("now", String.valueOf(start) + ',' + String.valueOf(now) + "," + String.valueOf(end));
+                        if (now >= start && now <= end) {
+                            it1 = new schitem(snapshot.child("venue").getValue().toString(), timeFormatter(start), snapshot.child("name").getValue().toString(), true);
+                            list.add(it1);
+                        }
                     }
                 }
+
                 Collections.sort(list,new mycomparator());
                 adapter.notifyDataSetChanged();
                 schedule.gone();
@@ -92,7 +96,7 @@ public class schtab0 extends Fragment {
 
     public String timeFormatter(Long timeInt)
     {
-        SimpleDateFormat s=new SimpleDateFormat("HH:MM");
+        SimpleDateFormat s=new SimpleDateFormat("HH:mm");
         Date d=new Date(timeInt);
         return s.format(d);
     }

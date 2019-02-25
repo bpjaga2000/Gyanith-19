@@ -161,12 +161,10 @@ public class event_details extends AppCompatActivity {
 
             }
         });
-        if(tag.charAt(0)=='N')
+        if(tag.charAt(0)=='N'||tag.charAt(0)=='P'||tag.charAt(0)=='G')
             ((Button)findViewById(R.id.reg)).setVisibility(View.GONE);
-        if(tag.equals("Tg")) {
-            ((Button) findViewById(R.id.reg)).setText("Topics");
-        }
-
+        if(tag.equals("P1"))
+            ((Button)findViewById(R.id.reg)).setVisibility(View.GONE);
 
 
         reg = FirebaseDatabase.getInstance().getReference().child(child).child(tag);
@@ -199,7 +197,7 @@ public class event_details extends AppCompatActivity {
                             catch(Exception e){}
                             intent.putExtra("id", id);
                             intent.putExtra("token", "");
-                            if (tag.equals("W7") || tag.equals("Tg"))
+                            if (tag.equals("W7"))
                                 intent.putExtra("ex", tag);
                             else
                                 intent.putExtra("ex", "");

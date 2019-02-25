@@ -97,7 +97,7 @@ public class schtab1 extends Fragment {
 
     public String timeFormatter(Long timeInt)
     {
-        SimpleDateFormat s=new SimpleDateFormat("HH:MM");
+        SimpleDateFormat s=new SimpleDateFormat("HH:mm");
         Date d=new Date(timeInt);
         return s.format(d);
     }

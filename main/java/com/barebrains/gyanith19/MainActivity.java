@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                    replace(new notifications());
                     title.setText("Notifications");
                     item.setIcon(R.drawable.ic_baseline_notifications_24px);
-                    notif.edit().putBoolean("newnot",false);
+                    notif.edit().putBoolean("newnot",false).commit();
                     return true;
             }
             return false;

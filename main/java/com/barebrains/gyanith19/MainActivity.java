@@ -3,6 +3,7 @@ package com.barebrains.gyanith19;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.MenuItem;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce;
     private ImageView imageView;
     Context context;
+    SharedPreferences notif;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                    replace(new notifications());
                     title.setText("Notifications");
+                    item.setIcon(R.drawable.ic_baseline_notifications_24px);
+                    notif.edit().putBoolean("newnot",false);
                     return true;
             }
             return false;
@@ -94,11 +99,9 @@ public class MainActivity extends AppCompatActivity {
         imageView=findViewById(R.id.topbaricon);
         context=this;
 
-
+        notif = context.getSharedPreferences("com.barebrains.Gyanith19", Context.MODE_PRIVATE);
         botnav=findViewById(R.id.navigation);
         title=findViewById(R.id.title);
-
-
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -125,8 +128,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        if(notif.getBoolean("newnot",false)){
+            navigation.getMenu().getItem(3).setIcon(R.drawable.ic_notification);
+        }
 }
 
 }

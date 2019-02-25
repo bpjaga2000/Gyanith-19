@@ -93,6 +93,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/homeAsUpIndicator"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -118,6 +119,7 @@
                 android:fontFamily="@font/sofiaprolight"
                 android:gravity="center"
                 android:text="NIT PUDUCHERRY"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <TextView
@@ -138,7 +140,7 @@
                 android:fontFamily="@font/sofiaprolight"
                 android:gravity="center"
                 android:text="Feb 28 - Mar 2"
-                android:textColor="#EEEEEE"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <TextView
@@ -148,7 +150,7 @@
                 android:layout_margin="10dp"
                 android:fontFamily="@font/pnreg"
                 android:text="Gyanith "
-                android:textColor="@color/whitealpha"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <TextView

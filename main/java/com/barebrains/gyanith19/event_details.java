@@ -1,9 +1,14 @@
 package com.barebrains.gyanith19;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -30,22 +36,27 @@ public class event_details extends AppCompatActivity {
     TextView title,desc;
     ImageView eveimage;
     ToggleButton favtb;
-    DatabaseReference reference;
+    DatabaseReference reference,reg;
     Intent intent;
     String child,tag;
     TabLayout dtab;
     SharedPreferences sp;
     Button bb2;
     String tab1,tab2,tab3;
+    Context context;
+    String id="";
+    AlertDialog.Builder a;
+    AlertDialog vi;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Explode());
-        getWindow().setExitTransition(new Explode());
+       // getWindow().setEnterTransition(new Explode());
+       // getWindow().setExitTransition(new Explode());
         setContentView(R.layout.activity_event_details);
+        a=new AlertDialog.Builder(this);
 
 
         sp= this.getSharedPreferences("com.barebrains.Gyanith19",MODE_PRIVATE);
@@ -57,9 +68,11 @@ public class event_details extends AppCompatActivity {
         title=findViewById(R.id.evedttitle);
         desc=findViewById(R.id.evedesc);
         dtab=findViewById(R.id.dtab);
+        context =this;
 
         eveimage=findViewById(R.id.eveimv);
         favtb=findViewById(R.id.favButton);
+
 
         bb2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,11 +161,75 @@ public class event_details extends AppCompatActivity {
 
             }
         });
+        if(tag.charAt(0)=='N')
+            ((Button)findViewById(R.id.reg)).setVisibility(View.GONE);
+        if(tag.equals("Tg")) {
+            ((Button) findViewById(R.id.reg)).setText("Topics");
+        }
+
+
+
+        reg = FirebaseDatabase.getInstance().getReference().child(child).child(tag);
+
+        reg.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                String tm="1";
+                try {
+                    tm = dataSnapshot.child("tm").getValue().toString();
+                }catch(Exception e){}
+                Button b[] = new Button[2];
+                LinearLayout linlay = new LinearLayout(context);
+                linlay.setOrientation(LinearLayout.VERTICAL);
+                Log.i("alert",tm);
+                for (int i = 0; i < tm.length(); i++) {
+                    b[i] = new Button(context);
+                    b[i].setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    b[i].setText("Register for " + tm.charAt(i));
+                    linlay.addView(b[i]);
+                    final int i1 = i;
+                    b[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, register.class);
+                            try {
+                                id = dataSnapshot.child("id").getValue().toString();
+                                id = id.substring(3 * i1, 3 * (i1 + 1));
+                            }
+                            catch(Exception e){}
+                            intent.putExtra("id", id);
+                            intent.putExtra("token", "");
+                            if (tag.equals("W7") || tag.equals("Tg"))
+                                intent.putExtra("ex", tag);
+                            else
+                                intent.putExtra("ex", "");
+                            startActivity(intent);
+                        }
+                    });
+                }
+
+                a.setTitle("Register");
+                a.setView(linlay);
+                vi=a.create();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+
+
 
         ((Button)findViewById(R.id.reg)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(event_details.this,"Registrations opening shortly",Toast.LENGTH_LONG).show();
+
+                vi.show();
             }
         });
 

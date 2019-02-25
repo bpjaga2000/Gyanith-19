@@ -70,7 +70,11 @@ public class notreceiver extends BroadcastReceiver {
                     nmc.notify(1000,b.build());
                     mp.start();
                     sp.edit().putLong("notcount",count).commit();
+                    sp.edit().putBoolean("newnot",true).commit();
+
                 }
+                else
+                    sp.edit().putLong("notcount",count).commit();
 
 
             }

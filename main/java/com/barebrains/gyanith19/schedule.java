@@ -84,7 +84,7 @@ public class schedule extends Fragment {
 
     public class pager extends FragmentStatePagerAdapter{
 
-        private String[] tabTitles = new String[]{"Live", "Day 0", "Day 1","Day 2"};
+        private String[] tabTitles = new String[]{"Live", "Day 1", "Day 2","Day 3"};
 
         public pager(FragmentManager fm,int tabs) {
             super(fm);

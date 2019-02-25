@@ -186,6 +186,7 @@ public class LoginActivity extends AppCompatActivity  {
                                                     sp.edit().putString("jsonresponse", response.toString()).apply();
                                                     try{
                                                         String gid = response.getString("gyanithid");
+                                                        sp.edit().putString("gidreg",gid).apply();
                                                         ((TextView)findViewById(R.id.gidtv)).setText(gid);
                                                         String username = response.getString("username");
                                                         ((TextView)findViewById(R.id.usernametv)).setText(username);

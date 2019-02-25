@@ -18,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -69,6 +71,7 @@ public class schtab0 extends Fragment {
                         list.add(it1);
                     }
                 }
+                Collections.sort(list,new mycomparator());
                 adapter.notifyDataSetChanged();
                 schedule.gone();
 
@@ -92,5 +95,13 @@ public class schtab0 extends Fragment {
         SimpleDateFormat s=new SimpleDateFormat("HH:MM");
         Date d=new Date(timeInt);
         return s.format(d);
+    }
+
+    public class mycomparator implements Comparator<schitem> {
+
+        @Override
+        public int compare(schitem o1, schitem o2) {
+            return o1.getTime().compareTo(o2.getTime());
+        }
     }
 }

@@ -3,8 +3,8 @@
     package="com.barebrains.gyanith19">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".gyanith19"
@@ -14,6 +14,7 @@
         android:roundIcon="@drawable/l2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Noactionbar">
+        <activity android:name=".register" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -37,7 +38,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".about"></activity>
+        <activity android:name=".about" />
     </application>
 
 </manifest>

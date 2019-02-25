@@ -19,6 +19,8 @@ import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -49,6 +51,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -61,17 +64,17 @@ public class LoginActivity extends AppCompatActivity  {
     EditText uid,pwd;
     Button signin, back;
     Bitmap bitmap;
-    String id,pw;
+    String id,pw,pass;
     ProgressBar qrpr, loginprog;
     ImageView qrImage, qrz;
     SharedPreferences sp;
     LinearLayout eventll, workshopll, signup;
+    WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         back=findViewById(R.id.backbutlogin);
         qrImage=findViewById(R.id.qrimage);
         qrpr=findViewById(R.id.qrprog);
@@ -83,15 +86,9 @@ public class LoginActivity extends AppCompatActivity  {
         signin=findViewById(R.id.email_sign_in_button);
         eventll=findViewById(R.id.eventsll);
         workshopll=findViewById(R.id.workshopll);
+        webview = findViewById(R.id.wvreg);
         signup=findViewById(R.id.signupll);
-
-        final String urls[] = new String[2];
         sp = getSharedPreferences("com.barebrains.gyanith19", MODE_PRIVATE);
-        String storedid, storedpass;
-        storedid = sp.getString("userid","");
-        storedpass = sp.getString("userpass","");
-
-       // if(!storedid.equals(""))
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,357 +97,75 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.backbutwv)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //REGISTER USER
-                ((ScrollView)findViewById(R.id.sign)).setVisibility(View.INVISIBLE);
-                ((CardView)findViewById(R.id.regcard)).setVisibility(View.VISIBLE);
-                back.setVisibility(View.GONE);
-            }
-        });
-
-        ((Button)findViewById(R.id.closereg)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((CardView)findViewById(R.id.regcard)).setVisibility(View.GONE);
+                webview.setVisibility(View.GONE);
                 ((ScrollView)findViewById(R.id.sign)).setVisibility(View.VISIBLE);
                 back.setVisibility(View.VISIBLE);
             }
         });
 
-
-
-
-
-
-        if (!isNetworkAvailable() && storedid.equals("")){
-            Toast.makeText(getApplicationContext(),"Network data unavailable!", Toast.LENGTH_LONG).show();
-        }else
-            if (!isNetworkAvailable() && !storedid.equals("")){
-                Toast.makeText(getApplicationContext(), "Network unavailable. Showing old data..", Toast.LENGTH_LONG).show();
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //REGISTER USER
+                back.setVisibility(View.GONE);
+                loginprog.setVisibility(View.VISIBLE);
                 ((ScrollView)findViewById(R.id.sign)).setVisibility(View.INVISIBLE);
-                loadfromSharedpref();
-            }else
-            {
-                if(!storedid.equals("")){
-
-                    urls[0]= "";  // link to receive access token
-                    urls[1] = ""; // link to receive userdetails json
-                    ((FrameLayout)findViewById(R.id.userdetails)).setVisibility(View.VISIBLE);
-                    ((ScrollView)findViewById(R.id.sign)).setVisibility(View.INVISIBLE);
-                    loginprog.setVisibility(View.VISIBLE);
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("misc");
-                    ref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            urls[0] = dataSnapshot.child("loginurl").getValue().toString();
-                            urls[1] = dataSnapshot.child("userdeturl").getValue().toString();
-
-                            pw = md5(pwd.getText().toString());
-                            id = md5(uid.getText().toString());
-
-                            urls[0].replaceAll("UserId=", ("UserId=" + id));
-
-                            RequestQueue q = Volley.newRequestQueue(getApplicationContext());
-
-                            JsonObjectRequest j=new JsonObjectRequest(Request.Method.GET,
-                                    urls[0], null, new Response.Listener<JSONObject>() {
-
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    if (response.has("token")){
-                                        String accesstoken = "";
-                                        Log.i("JSON", "Received response");
-                                        try {
-                                            accesstoken = response.getString("token");
-                                        }catch (Exception e){
-                                            e.printStackTrace();
-                                        }
-
-                                        if (!accesstoken.equals("")){
-                                            sp.edit().putString("userid", id).apply();
-                                            sp.edit().putString("userpass", pw).apply();
-                                            ((CardView)findViewById(R.id.qrcard)).setEnabled(false);
-                                            ((FrameLayout)findViewById(R.id.userdetails)).setVisibility(View.VISIBLE);
-                                            loginprog.setVisibility(View.GONE);
-                                            urls[1].replaceAll("token=", ( "token" + accesstoken ));
-                                            Log.i("URLL", urls[1]);
-
-                                            RequestQueue qq = Volley.newRequestQueue(getApplicationContext());
-                                            JsonObjectRequest jj = new JsonObjectRequest(Request.Method.GET,
-                                                    urls[1], null, new Response.Listener<JSONObject>() {
-                                                @Override
-                                                public void onResponse(JSONObject response) {
-                                                    Log.i("JSONN", response.toString());
-                                                    sp.edit().putString("jsonresponse", response.toString()).apply();
-                                                    try{
-                                                        String gid = response.getString("gyanithid");
-                                                        sp.edit().putString("gidreg",gid).apply();
-                                                        ((TextView)findViewById(R.id.gidtv)).setText(gid);
-                                                        String username = response.getString("username");
-                                                        ((TextView)findViewById(R.id.usernametv)).setText(username);
-                                                        JSONArray events = response.getJSONArray("eventsreg");
-                                                        JSONArray workshops = response.getJSONArray("workreg");
-                                                        int workshopcount = workshops.length();
-                                                        int eventscount = events.length();
-                                                        String qrdata = "GyanithId: "+ gid + "\n" + "EventsReg:";
-
-                                                        if(eventscount == 0){
-                                                            TextView tv = new TextView(getApplicationContext());
-                                                            tv.setText("No events registered!");
-                                                            tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                            tv.setTextSize(18);
-                                                            tv.setTextColor(Color.WHITE);
-                                                            eventll.addView(tv);
-                                                        }
-                                                        for (int i=0; i<eventscount; i++){
-                                                            String event =events.getString(i);
-                                                            Log.i("JSONN", event );
-                                                            qrdata = qrdata + " " + event + ",";
-                                                            TextView tv = new TextView(getApplicationContext());
-                                                            tv.setText(event);
-                                                            tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                            tv.setTextSize(18);
-                                                            tv.setTextColor(Color.WHITE);
-                                                            eventll.addView(tv);
-                                                        }
-                                                        qrdata = qrdata + "\n" + "Workshops Reg:";
+                webview.setVisibility(View.VISIBLE);
+                webview.getSettings().setJavaScriptEnabled(true);
+                webview.setWebViewClient(new WebViewClient(){
+                    @Override
+                    public void onPageFinished(WebView view, String url) {
+                        super.onPageFinished(view, url);
+                        loginprog.setVisibility(View.GONE);
+                    }
+                });
+                webview.loadUrl("https://gyanith.org/register.php");
+                back.setVisibility(View.GONE);
+            }
+        });
 
 
-                                                        if(workshopcount == 0){
-                                                            TextView tv = new TextView(getApplicationContext());
-                                                            tv.setText("No workshops registered!");
-                                                            //tv.setTypeface(Typeface.createFromAsset(getAssets(), "sofiaprolight.otf"));
-                                                            tv.setTextSize(18);
-                                                            tv.setTextColor(Color.WHITE);
-                                                            workshopll.addView(tv);
-                                                        }
-                                                        for (int i=0; i<workshopcount; i++){
-                                                            String work = workshops.getString(i);
-                                                            Log.i("JSONN", work);
-                                                            qrdata = qrdata + " " + work + ",";
-                                                            TextView tv = new TextView(getApplicationContext());
-                                                            tv.setText(work);
-                                                            tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                            tv.setTextSize(18);
-                                                            tv.setTextColor(Color.WHITE);
-                                                            workshopll.addView(tv);
-                                                        }
-
-                                                        qrdata = qrdata.substring(0,qrdata.length()-1) + ".";
-                                                        sp.edit().putString("qrdata",qrdata).apply();
-                                                        QRGEncoder qrgEncoder = new QRGEncoder(qrdata, null, QRGContents.Type.TEXT, 300);
-                                                        try {
-                                                            // Getting QR-Code as Bitmap
-                                                            bitmap = qrgEncoder.encodeAsBitmap();
-                                                            // Setting Bitmap to ImageView
-                                                            qrImage.setImageBitmap(bitmap);
-                                                            qrz.setImageBitmap(bitmap);
-                                                            ((CardView)findViewById(R.id.qrcard)).setEnabled(true);
-                                                            qrpr.setVisibility(View.GONE);
-                                                        } catch (WriterException e) {
-                                                            Log.v("Exception", e.toString());
-                                                        }
-
-                                                    }catch (Exception e){
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            },new Response.ErrorListener() {
-                                                @Override
-                                                public void onErrorResponse(VolleyError error) {
-
-                                                }
-                                            });
-                                            qq.add(jj);
-
-                                        }
-                                    }
-                                    else Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
-                                    loginprog.setVisibility(View.GONE);
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                            q.add(j);
-
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(getApplicationContext(), "Check network connection and try again!" , Toast.LENGTH_LONG).show();
-                            loginprog.setVisibility(View.GONE);
-                        }
-                    });
-                }else{
-                    signin.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            loginprog.setVisibility(View.VISIBLE);
-                            String pas = pwd.getText().toString();
-                            String idd = uid.getText().toString();
-                            if (pas.equals("") || idd.equals("")){
-                                loginprog.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(), "Enter credentials!", Toast.LENGTH_LONG).show();
-                            }
-                            else {
-                                pw = md5(pas);
-                                id = md5(idd);
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("misc");
-                                ref.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        urls[0] = dataSnapshot.child("loginurl").getValue().toString();
-                                        urls[1] = dataSnapshot.child("userdeturl").getValue().toString();
-
-
-                                        urls[0].replaceAll("UserId=", ("UserId=" + id));
-
-                                        RequestQueue q = Volley.newRequestQueue(getApplicationContext());
-
-                                        JsonObjectRequest j=new JsonObjectRequest(Request.Method.GET,
-                                                urls[0], null, new Response.Listener<JSONObject>() {
-
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                if (response.has("token")){
-                                                    String accesstoken = "";
-                                                    Log.i("JSON", "Received response");
-                                                    try {
-                                                        accesstoken = response.getString("token");
-                                                    }catch (Exception e){
-                                                        e.printStackTrace();
-                                                    }
-
-                                                    if (!accesstoken.equals("")){
-                                                        sp.edit().putString("userid", id).apply();
-                                                        sp.edit().putString("userpass", pw).apply();
-                                                        ((CardView)findViewById(R.id.qrcard)).setEnabled(false);
-                                                        ((FrameLayout)findViewById(R.id.userdetails)).setVisibility(View.VISIBLE);
-                                                        ((ScrollView)findViewById(R.id.sign)).setVisibility(View.GONE);
-                                                        loginprog.setVisibility(View.GONE);
-                                                        urls[1].replaceAll("token=", ( "token" + accesstoken ));
-                                                        Log.i("URLL", urls[1]);
-
-                                                        RequestQueue qq = Volley.newRequestQueue(getApplicationContext());
-                                                        JsonObjectRequest jj = new JsonObjectRequest(Request.Method.GET,
-                                                                urls[1], null, new Response.Listener<JSONObject>() {
-                                                            @Override
-                                                            public void onResponse(JSONObject response) {
-                                                                Log.i("JSONN", response.toString());
-                                                                sp.edit().putString("jsonresponse", response.toString()).apply();
-                                                                try{
-                                                                    String gid = response.getString("gyanithid");
-                                                                    ((TextView)findViewById(R.id.gidtv)).setText(gid);
-                                                                    String username = response.getString("username");
-                                                                    ((TextView)findViewById(R.id.usernametv)).setText(username);
-                                                                    JSONArray events = response.getJSONArray("eventsreg");
-                                                                    JSONArray workshops = response.getJSONArray("workreg");
-                                                                    int workshopcount = workshops.length();
-                                                                    int eventscount = events.length();
-                                                                    String qrdata = "GyanithId: "+ gid + "\nName: " + username + "\nEventsReg:";
-
-                                                                    if(eventscount == 0){
-                                                                        TextView tv = new TextView(getApplicationContext());
-                                                                        tv.setText("No registered events found!");
-                                                                        tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                                        tv.setTextSize(18);
-                                                                        tv.setTextColor(Color.WHITE);
-                                                                        eventll.addView(tv);
-                                                                    }
-                                                                    for (int i=0; i<eventscount; i++){
-                                                                        String event =events.getString(i);
-                                                                        Log.i("JSONN", event );
-                                                                        qrdata = qrdata + " " + event + ",";
-                                                                        TextView tv = new TextView(getApplicationContext());
-                                                                        tv.setText(event);
-                                                                        tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                                        tv.setTextSize(18);
-                                                                        tv.setTextColor(Color.WHITE);
-                                                                        eventll.addView(tv);
-                                                                    }
-                                                                    qrdata = qrdata + "\n" + "Workshops Reg:";
-
-
-                                                                    if(workshopcount == 0){
-                                                                        TextView tv = new TextView(getApplicationContext());
-                                                                        tv.setText("No registered workshops found!");
-                                                                        //tv.setTypeface(Typeface.createFromAsset(getAssets(), "sofiaprolight.otf"));
-                                                                        tv.setTextSize(18);
-                                                                        tv.setTextColor(Color.WHITE);
-                                                                        workshopll.addView(tv);
-                                                                    }
-                                                                    for (int i=0; i<workshopcount; i++){
-                                                                        String work = workshops.getString(i);
-                                                                        Log.i("JSONN", work);
-                                                                        qrdata = qrdata + " " + work + ",";
-                                                                        TextView tv = new TextView(getApplicationContext());
-                                                                        tv.setText(work);
-                                                                        tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
-                                                                        tv.setTextSize(18);
-                                                                        tv.setTextColor(Color.WHITE);
-                                                                        workshopll.addView(tv);
-                                                                    }
-
-                                                                    qrdata = qrdata.substring(0,qrdata.length()-1) + ".";
-                                                                    sp.edit().putString("qrdata",qrdata).apply();
-                                                                    QRGEncoder qrgEncoder = new QRGEncoder(qrdata, null, QRGContents.Type.TEXT, 300);
-                                                                    try {
-                                                                        // Getting QR-Code as Bitmap
-                                                                        bitmap = qrgEncoder.encodeAsBitmap();
-                                                                        // Setting Bitmap to ImageView
-                                                                        qrImage.setImageBitmap(bitmap);
-                                                                        qrz.setImageBitmap(bitmap);
-                                                                        ((CardView)findViewById(R.id.qrcard)).setEnabled(true);
-                                                                        qrpr.setVisibility(View.GONE);
-                                                                    } catch (WriterException e) {
-                                                                        Log.v("Exception", e.toString());
-                                                                    }
-
-                                                                }catch (Exception e){
-                                                                    e.printStackTrace();
-                                                                }
-                                                            }
-                                                        },new Response.ErrorListener() {
-                                                            @Override
-                                                            public void onErrorResponse(VolleyError error) {
-
-                                                            }
-                                                        });
-                                                        qq.add(jj);
-
-                                                    }
-                                                }
-                                                else {
-                                                    pwd.setText("");
-                                                    Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
-                                                }
-                                                loginprog.setVisibility(View.GONE);
-                                            }
-                                        }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                // Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
-                                            }
-                                        });
-                                        q.add(j);
-
-                                    }
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Toast.makeText(getApplicationContext(), "Check network connection and try again!" , Toast.LENGTH_LONG).show();
-                                        loginprog.setVisibility(View.GONE);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                }
-
+        if (!isNetworkAvailable()){
+            Toast.makeText(this, "Network unavailable!", Toast.LENGTH_LONG).show();
         }
+
+        String savedid = sp.getString("userid", "");
+        String savedpas = sp.getString("userpass", "");
+
+        if (!savedid.equals("")){
+
+            if (isNetworkAvailable()){
+                loginprog.setVisibility(View.VISIBLE);
+                ((ScrollView)findViewById(R.id.sign)).setVisibility(View.INVISIBLE);
+                signingyan(savedpas, savedid);
+            }
+            else{
+                loadfromSharedpref();
+            }
+        }
+
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginprog.setVisibility(View.VISIBLE);
+                String pas = pwd.getText().toString();
+                String idd = uid.getText().toString();
+
+                if (pas.equals("") || idd.equals("")){
+                    loginprog.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Enter credentials!", Toast.LENGTH_LONG).show();
+                }
+                else {//signingyan
+                    signingyan(pas, idd);
+                }
+            }
+        });
+
+
 
 
         ((CardView)findViewById(R.id.qrcard)).setOnClickListener(new View.OnClickListener() {
@@ -471,6 +186,156 @@ public class LoginActivity extends AppCompatActivity  {
 
     }
 
+    public void signingyan(String pas, String idd){
+        pass = pas;
+        pw = md5(pas);
+        Log.i("passmd5",pw);
+        id = idd;
+        final String urls[] = new String[2];
+        urls[0] = "http://gyanith.org/mobileapi/login_mobile.php?email=" + id + "&id=" + pw;//dataSnapshot.child("loginurl").getValue().toString();
+        urls[1] = "http://gyanith.org/mobileapi/profile.php?q=";
+
+        Log.i("JSONURL",urls[0]);
+
+        RequestQueue q = Volley.newRequestQueue(getApplicationContext());
+
+        JsonObjectRequest j=new JsonObjectRequest(Request.Method.GET,
+                urls[0], null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("JSON",response.toString());
+                if (response.has("token")){
+                    String accesstoken = "";
+
+                    Log.i("JSON", "Received response" + response.toString());
+                    try {
+                        accesstoken = response.getString("token");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    urls[1] = urls[1] + accesstoken;
+
+                    Log.i("JSONURL",urls[0]);
+
+                    RequestQueue qq = Volley.newRequestQueue(getApplicationContext());
+                    JsonObjectRequest jj = new JsonObjectRequest(Request.Method.GET, urls[1], null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            Log.i("JSON",response.toString());
+                            sp.edit().putString("userid", id).apply();
+                            sp.edit().putString("userpass", pass).apply();
+                            sp.edit().putString("userpasshash", pw).apply();
+                            ((CardView) findViewById(R.id.qrcard)).setEnabled(false);
+                            ((FrameLayout) findViewById(R.id.userdetails)).setVisibility(View.VISIBLE);
+                            ((ScrollView) findViewById(R.id.sign)).setVisibility(View.GONE);
+                            loginprog.setVisibility(View.GONE);
+
+                            sp.edit().putString("jsonresponse", response.toString()).apply();
+                            try {
+                                String gid = response.getString("gid");
+                                ((TextView) findViewById(R.id.gidtv)).setText(gid);
+                                String username = response.getString("name");
+                                ((TextView) findViewById(R.id.usernametv)).setText(username);
+                                ((TextView)findViewById(R.id.collegetv)).setText(response.getString("college"));
+                                JSONArray events = response.getJSONArray("event");
+                                JSONArray workshops = response.getJSONArray("work");
+
+                                int workshopcount = workshops.length();
+                                int eventscount = events.length();
+
+                                String qrdata = "GyanithId: " + gid + "\nCollege: " + response.getString("college") + "\nContact: " + response.getString("mobile")
+                                        + "\nName: " + username + "\nEventsReg:";
+
+                                if(eventscount == 0){
+                                    TextView tv = new TextView(getApplicationContext());
+                                    tv.setText("No registered events found!");
+                                    tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
+                                    tv.setTextSize(18);
+                                    tv.setTextColor(Color.WHITE);
+                                    eventll.addView(tv);
+                                }
+                                for (int i=0; i<eventscount; i++){
+                                    JSONObject object = events.getJSONObject(i);
+                                    String event = object.getString(String.valueOf(i));
+                                    Log.i("JSONN", event );
+                                    qrdata = qrdata + " " + event + ",";
+                                    TextView tv = new TextView(getApplicationContext());
+                                    tv.setText(event);
+                                    tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
+                                    tv.setTextSize(18);
+                                    tv.setTextColor(Color.WHITE);
+                                    eventll.addView(tv);
+                                }
+                                qrdata = qrdata + "\n" + "Workshops Reg:";
+
+                                if(workshopcount == 0){
+                                    TextView tv = new TextView(getApplicationContext());
+                                    tv.setText("No registered workshops found!");
+                                    tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
+                                    tv.setTextSize(18);
+                                    tv.setTextColor(Color.WHITE);
+                                    workshopll.addView(tv);
+                                }
+                                for (int i=0; i<workshopcount; i++){
+                                    JSONObject object = workshops.getJSONObject(i);
+                                    String work = object.getString(String.valueOf(i));
+                                    Log.i("JSONN", work);
+                                    qrdata = qrdata + " " + work + ",";
+                                    TextView tv = new TextView(getApplicationContext());
+                                    tv.setText(work);
+                                    tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
+                                    tv.setTextSize(18);
+                                    tv.setTextColor(Color.WHITE);
+                                    workshopll.addView(tv);
+                                }
+
+                                qrdata = qrdata.substring(0,qrdata.length()-1) + ".";
+
+                                sp.edit().putString("qrdata", qrdata).apply();
+                                QRGEncoder qrgEncoder = new QRGEncoder(qrdata, null, QRGContents.Type.TEXT, 300);
+                                try {
+                                    // Getting QR-Code as Bitmap
+                                    bitmap = qrgEncoder.encodeAsBitmap();
+                                    // Setting Bitmap to ImageView
+                                    qrImage.setImageBitmap(bitmap);
+                                    qrz.setImageBitmap(bitmap);
+                                    ((CardView) findViewById(R.id.qrcard)).setEnabled(true);
+                                    qrpr.setVisibility(View.GONE);
+                                } catch (WriterException e) {
+                                    Log.v("Exception", e.toString());
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    qq.add(jj);
+                }
+                else {
+                    pwd.setText("");
+                    Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
+                }
+                loginprog.setVisibility(View.GONE);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(getApplicationContext(), "User credentials invalid!", Toast.LENGTH_LONG).show();
+            }
+        });
+        q.add(j);
+    }
+
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -484,9 +349,10 @@ public class LoginActivity extends AppCompatActivity  {
         String jsonres = sp.getString("jsonresponse", "");
         JSONObject response = null;
         try{
-          response = new JSONObject(jsonres);
-          ((TextView)findViewById(R.id.gidtv)).setText(response.getString("gyanithid"));
-          ((TextView)findViewById(R.id.usernametv)).setText(response.getString("username"));
+            response = new JSONObject(jsonres);
+            ((TextView)findViewById(R.id.gidtv)).setText(response.getString("gyanithid"));
+            ((TextView)findViewById(R.id.usernametv)).setText(response.getString("username"));
+            ((TextView)findViewById(R.id.collegetv)).setText(response.getString("college"));
 
             JSONArray events = response.getJSONArray("eventsreg");
             JSONArray workshops = response.getJSONArray("workreg");
@@ -515,7 +381,7 @@ public class LoginActivity extends AppCompatActivity  {
             if(workshopcount == 0){
                 TextView tv = new TextView(getApplicationContext());
                 tv.setText("No workshops registered!");
-                //tv.setTypeface(Typeface.createFromAsset(getAssets(), "sofiaprolight.otf"));
+                tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
                 tv.setTextSize(18);
                 tv.setTextColor(Color.WHITE);
                 workshopll.addView(tv);
@@ -548,23 +414,32 @@ public class LoginActivity extends AppCompatActivity  {
         }
     }
 
-    public String md5(String s) {
+    public static String md5(String input)
+    {
         try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
 
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-            return hexString.toString();
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            // digest() method is called to calculate message digest
+            //  of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
         }
-        return "";
+
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

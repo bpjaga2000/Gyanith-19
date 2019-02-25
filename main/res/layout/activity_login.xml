@@ -15,14 +15,6 @@
 
     <!-- Login progress -->
 
-    <ProgressBar
-        android:id="@+id/loginprog"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
     <Button
         android:id="@+id/backbutlogin"
         android:layout_width="40dp"
@@ -227,8 +219,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/sofiaprolight"
-                    android:text="Raagava Prasadh"
                     android:textAlignment="textStart"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/collegetv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/sofiaprolight"
+                    android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
@@ -334,292 +335,31 @@
         </FrameLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/regcard"
+    <WebView
+        android:id="@+id/wvreg"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/backbutwv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="?attr/homeAsUpIndicator"
+            android:backgroundTint="@android:color/white"
+            android:foreground="?attr/selectableItemBackground" />
+    </WebView>
+
+    <ProgressBar
+        android:id="@+id/loginprog"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:visibility="gone"
-        app:cardCornerRadius="7dp"
-        app:cardElevation="7dp">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
-                    android:layout_marginLeft="7dp"
-                    android:fontFamily="@font/sofiaprolight"
-                    android:text="Registration"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp" />
-
-                <View
-                    android:id="@+id/divider4"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="?android:attr/listDivider"
-                    android:foreground="@color/grey" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:id="@+id/regformll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:orientation="vertical"
-                        android:paddingBottom="5dp">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp">
-
-                            <EditText
-                                android:id="@+id/usernamereg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:hint="Username"
-                                android:inputType="text"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp"
-                            app:passwordToggleEnabled="true"
-                            app:passwordToggleTint="@color/colorAccent">
-
-                            <EditText
-                                android:id="@+id/passreg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:hint="Password"
-                                android:inputType="textPassword"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp">
-
-                            <EditText
-                                android:id="@+id/namereg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:hint="Name"
-                                android:inputType="textCapWords"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp">
-
-                            <EditText
-                                android:id="@+id/emailreg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:hint="Email address"
-                                android:inputType="textEmailAddress"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp">
-
-                            <EditText
-                                android:id="@+id/phonereg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:hint="Contact Number"
-                                android:inputType="phone"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/textView201"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:text=" Gender"
-                                android:textSize="18sp" />
-
-                            <RadioGroup
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/maleradio"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/sofiaprolight"
-                                    android:text="Male" />
-
-                                <RadioButton
-                                    android:id="@+id/femaleradio"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/sofiaprolight"
-                                    android:text="Female" />
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp"
-                            android:layout_marginTop="4dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/textView20"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/sofiaprolight"
-                                android:text=" Accomodation"
-                                android:textSize="18sp" />
-
-                            <CheckBox
-                                android:id="@+id/checkBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/regstatusmsg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="User registered successfully!"
-                        android:textSize="24sp"
-                        android:visibility="invisible" />
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp">
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/closereg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="7dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/spregu"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="5dp"
-                        android:text="CLOSE"
-                        android:textSize="16sp" />
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        app:cardCornerRadius="7dp">
-
-                        <Button
-                            android:id="@+id/submitreg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="-5dp"
-                            android:layout_marginTop="-5dp"
-                            android:background="@android:color/holo_orange_dark"
-                            android:fontFamily="@font/spregu"
-                            android:gravity="center_vertical|center_horizontal"
-                            android:text="Submit"
-                            android:textColor="@android:color/white"
-                            android:textSize="16sp" />
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </ScrollView>
-
-    </android.support.v7.widget.CardView>
+        android:visibility="gone" />
 
 </FrameLayout>

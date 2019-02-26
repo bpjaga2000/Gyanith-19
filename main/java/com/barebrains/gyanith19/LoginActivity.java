@@ -178,6 +178,9 @@ public class LoginActivity extends AppCompatActivity  {
                         .setPositiveButton("Sign out", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                sp.edit().remove("userid").apply();
+                                sp.edit().remove("userpass").apply();
+                                sp.edit().remove("userpasshash").apply();
                                 ((FrameLayout) findViewById(R.id.userdetails)).setVisibility(View.GONE);
                                 ((ScrollView) findViewById(R.id.sign)).setVisibility(View.VISIBLE);
                                 Toast.makeText(getApplicationContext(), "User signed out!", Toast.LENGTH_LONG).show();

@@ -285,7 +285,7 @@ public class LoginActivity extends AppCompatActivity  {
                                     Log.i("JSONN", event );
                                     qrdata = qrdata + " " + event + ",";
                                     TextView tv = new TextView(getApplicationContext());
-                                    tv.setText(event);
+                                    tv.setText("• "+event);
                                     tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
                                     tv.setTextSize(18);
                                     tv.setTextColor(Color.WHITE);
@@ -306,7 +306,7 @@ public class LoginActivity extends AppCompatActivity  {
                                     Log.i("JSONN", work);
                                     qrdata = qrdata + " " + work + ",";
                                     TextView tv = new TextView(getApplicationContext());
-                                    tv.setText(work);
+                                    tv.setText("• "+work);
                                     tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
                                     tv.setTextSize(18);
                                     tv.setTextColor(Color.WHITE);
@@ -392,7 +392,7 @@ public class LoginActivity extends AppCompatActivity  {
                 String event =events.getString(i);
                 Log.i("JSONN", event );
                 TextView tv = new TextView(getApplicationContext());
-                tv.setText(event);
+                tv.setText("• "+event);
                 tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
                 tv.setTextSize(18);
                 tv.setTextColor(Color.WHITE);
@@ -410,7 +410,7 @@ public class LoginActivity extends AppCompatActivity  {
             for (int i=0; i<workshopcount; i++){
                 String work = workshops.getString(i);
                 TextView tv = new TextView(getApplicationContext());
-                tv.setText(work);
+                tv.setText("• "+work);
                 tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/sofiaprolight.otf"));
                 tv.setTextSize(18);
                 tv.setTextColor(Color.WHITE);
